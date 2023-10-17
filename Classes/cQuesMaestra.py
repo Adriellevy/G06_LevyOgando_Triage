@@ -1,8 +1,8 @@
 import queue
-from cEnfermero import cEnfermero
+#from cEnfermero import cEnfermero
 from cPaciente import cPaciente
 from Errores.cErrorTamanio import cErrorTamanio
-
+from Errores.cErrorGravedad import cErrorGravedad
 
 class cQuesMaestra:
     def __init__(self):
@@ -12,7 +12,8 @@ class cQuesMaestra:
         self.V = queue.Queue(maxsize=0)
         self.AZ = queue.Queue(maxsize=0)
         self.Lista_de_colas = []
-        L_enfermeros = []
+        #enermero_def = cEnfermero()
+        #L_enfermeros = []
         self.Lista_de_colas.append(self.R)
         self.Lista_de_colas.append(self.N)
         self.Lista_de_colas.append(self.AM)
@@ -34,3 +35,14 @@ class cQuesMaestra:
                 return self.Reorganizar(indice_lista)
         except:
             raise cErrorTamanio("Reorganizar")
+
+    def insert(self, _paciente):
+        try:
+            num = -1
+            try:
+                num = _paciente.getGravedad()
+            except cErrorGravedad("En el insert") as err:
+                num = _paciente.getPrioridadNueva()
+            self.Lista_de_colas[num].put_nowait(_paciente)
+        except cErrorTamanio("Error en el insert") as errorTam:
+            print(cErrorTamanio)

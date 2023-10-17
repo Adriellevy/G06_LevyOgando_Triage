@@ -1,4 +1,4 @@
-from cGravedad import cGravedad
+from Classes.cGravedad import cGravedad
 import datetime as dt
 class cPaciente:
 
