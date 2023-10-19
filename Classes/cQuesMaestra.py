@@ -1,8 +1,8 @@
 import queue
 #from cEnfermero import cEnfermero
-from cPaciente import cPaciente
-from Errores.cErrorTamanio import cErrorTamanio
-from Errores.cErrorGravedad import cErrorGravedad
+from .cPaciente import cPaciente
+from .Errores.cErrorTamanio import cErrorTamanio
+from .Errores.cErrorGravedad import cErrorGravedad
 
 class cQuesMaestra:
     def __init__(self):

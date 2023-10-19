@@ -1,4 +1,4 @@
-from cPaciente import cPaciente
+from .cPaciente import cPaciente
 class cEnfermero:
     def __init__(self):
         self.nombre = "def"

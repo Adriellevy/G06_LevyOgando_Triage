@@ -1,6 +1,6 @@
 import datetime as dt
 import string #chequear si es necesario esta libreria
-from Errores.cErrorGravedad import cErrorGravedad
+from .Errores.cErrorGravedad import cErrorGravedad
 
 class cGravedad:
     def __init__(self, _color):

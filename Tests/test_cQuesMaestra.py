@@ -1,6 +1,6 @@
-from Classes.cPaciente import cPaciente
+from Classes.cQuesMaestra import *
 def test_reorganizar():
-    paciente_1 = cPaciente("Julian","rojo")
+    paciente_1 = cPaciente("Julian", "rojo")
     assert 4 == 4
     #assert square(3) == 9
 

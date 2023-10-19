@@ -1,12 +1,12 @@
-from Classes.cGravedad import cGravedad
+from .cGravedad import cGravedad
 import datetime as dt
+
+
 class cPaciente:
-
-    def __int__(self,_nombre,color):
+    def __init__(self, _nombre, color):
         self.gravedad = cGravedad(color)
-        self.nombre=_nombre
+        self.nombre = _nombre
         self.tiempoLlegada = dt.datetime.now()
-
 
     def Atender(self):
         """
@@ -30,8 +30,8 @@ class cPaciente:
         """
 
         return (self.getGravedad().getTiempoGravedadActual() - (dt.datetime.now() - self.tiempoLlegada))
-    def getTiempoRestanteMayorGravedad(self):
 
+    def getTiempoRestanteMayorGravedad(self):
         """
 
         :return:
