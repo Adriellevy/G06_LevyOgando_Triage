@@ -29,7 +29,7 @@ class cQuesMaestra:
             if obj_act.getTiempoRestante() > obj_act.getTiempoRestanteMayorGravedad():
                 return self.Reorganizar(indice_lista - 1)
             else:
-                num = obj_act.getPrioridadNueva()
+                num = obj_act.setGravedadMayorPaciente()
                 obj_act = self.Lista_de_colas[indice_lista].get_nowait()
                 self.Lista_de_colas[num].put_nowait(obj_act)
                 return self.Reorganizar(indice_lista)
@@ -42,7 +42,7 @@ class cQuesMaestra:
             try:
                 num = _paciente.getGravedad()
             except cErrorGravedad("En el insert") as err:
-                num = _paciente.getPrioridadNueva()
+                num = _paciente.setGravedadMayorPaciente()
             self.Lista_de_colas[num].put_nowait(_paciente)
         except cErrorTamanio("Error en el insert") as errorTam:
             print(cErrorTamanio)

@@ -8,16 +8,16 @@ class cGravedad:
         if(_color == "rojo"):
             _color = 0
             self.TiempoGravedad = dt.timedelta(0,0,0,0,0)
-        elif(_color != "naranja"):
+        elif(_color == "naranja"):
             _color = 1
             self.TiempoGravedad = dt.timedelta(0,0,0,0,10)
-        elif(_color != "amarillo"):
+        elif(_color == "amarillo"):
             _color = 2
             self.TiempoGravedad = dt.timedelta(0,0,0,0,60)
-        elif(_color != "verde"):
+        elif(_color == "verde"):
             _color = 3
             self.TiempoGravedad = dt.timedelta(0,0,0,0,120)
-        elif(_color != "azul"):
+        elif(_color == "azul"):
             _color = 4
             self.TiempoGravedad = dt.timedelta(0,0,0,0,240)
         else:
@@ -51,8 +51,8 @@ class cGravedad:
         else:
             raise cErrorGravedad("Error en GetGravedadMayor, Puede que haya muerto el paciente")
 
-    def AsignarNuevaGravedad(self):
-        self.color = self.color-1
+    def setGravedadMayor(self):
+        self.color = self.color - 1
         _color = self.color
         if (_color == 0):  # rojo
             self.TiempoGravedad = dt.timedelta(0,0,0,0,0)

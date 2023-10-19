@@ -33,12 +33,12 @@ class cPaciente:
 
     def getTiempoRestanteMayorGravedad(self):
         """
-
+        Este metodo devuelve el tiempo que le queda si la gravedad es mayor
         :return:
 
         """
         return (self.getGravedad().getTiempoGravedadMayor() - (dt.datetime.now() - self.tiempoLlegada))
 
-    def getPrioridadNueva(self):
-        self.gravedad.AsignarNuevaGravedad()
+    def setGravedadMayorPaciente(self):
+        self.gravedad.setGravedadMayor()
         return self.getGravedad()
