@@ -3,6 +3,7 @@ import queue
 from .cPaciente import cPaciente
 from .Errores.cErrorTamanio import cErrorTamanio
 from .Errores.cErrorGravedad import cErrorGravedad
+from .Errores.cErrorPaciente import cErrorPaciente
 
 class cQuesMaestra:
     def __init__(self):
