@@ -1,4 +1,5 @@
 import datetime as dt
+import random
 
 import pytest
 from Classes.cQuesMaestra import *
@@ -51,7 +52,7 @@ def test_Paciente_sin_cambio_de_gravedad_verde():
         assert paciente_1.getGravedad() == 3
 
 def test_Paciente_cambio_de_gravedad_verde():
-    paciente_1 = cPaciente("3", "verde")
+    paciente_1 = cPaciente("2", "verde")
     paciente_1.tiempoLlegada = paciente_1.tiempoLlegada - dt.timedelta(minutes=120)
     paciente_1.setGravedadMayorPaciente()
     assert paciente_1.getGravedad() == 2
@@ -63,13 +64,13 @@ def test_Paciente_sin_cambio_de_gravedad_azul():
         assert paciente_1.getGravedad() == 4
 
 def test_Paciente_cambio_de_gravedad_azul():
-    paciente_1 = cPaciente("4", "azul")
-    paciente_1.tiempoLlegada = paciente_1.tiempoLlegada - dt.timedelta(minutes=240)
+    paciente_1 = cPaciente("3", "azul")
+    paciente_1.tiempoLlegada = paciente_1.tiempoLlegada - dt.timedelta(minutes=241)
     paciente_1.setGravedadMayorPaciente()
-    assert paciente_1.getGravedad() == 2
+    assert paciente_1.getGravedad() == 3
 
 def test_Paciente_cambio_de_gravedad_varias_gravedades():
-    paciente_1 = cPaciente("4", "azul")
+    paciente_1 = cPaciente("1", "azul")
     paciente_1.tiempoLlegada = paciente_1.tiempoLlegada - dt.timedelta(minutes=421)
     paciente_1.setGravedadMayorPaciente()
     assert paciente_1.getGravedad() == 1
@@ -86,21 +87,79 @@ def test_Paciente_tiempo_restante():
 
 
 def test_cQuesMaestra_Insertar():
-    paciente_1 = cPaciente("Julian", "rojo")
-    paciente_2 = cPaciente("Julian2", "Verde")
+    paciente_1 = cPaciente("Julian1", "rojo")
+    paciente_2 = cPaciente("Julian2", "naranja")
+    paciente_3 = cPaciente("Julian3", "amarillo")
+    paciente_4 = cPaciente("Julian4", "verde")
+    paciente_5 = cPaciente("Julian5", "azul")
     Organizador = cQuesMaestra()
     Organizador.insert(paciente_1)
     Organizador.insert(paciente_2)
-    assert Organizador.V.qsize() == 1
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
     assert Organizador.R.qsize() == 1
+    assert Organizador.N.qsize() == 1
+    assert Organizador.AM.qsize() == 1
+    assert Organizador.V.qsize() == 1
+    assert Organizador.AZ.qsize() == 1
 
+def test_cQuesMaestra_Obtener():
+    paciente_1 = cPaciente("Julian1", "rojo")
+    paciente_2 = cPaciente("Julian2", "naranja")
+    paciente_3 = cPaciente("Julian3", "amarillo")
+    paciente_4 = cPaciente("Julian4", "verde")
+    paciente_5 = cPaciente("Julian5", "azul")
+    Organizador = cQuesMaestra()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    assert Organizador.Lista_de_colas[3].get() == paciente_4
+    assert Organizador.Lista_de_colas[2].get() == paciente_3
+    assert Organizador.Lista_de_colas[4].get() == paciente_5
+    assert Organizador.Lista_de_colas[1].get() == paciente_2
+    assert Organizador.Lista_de_colas[0].get() == paciente_1
 def test_cQuesMaestra_Reorganizar():
-    paciente_1 = cPaciente("Julian", "rojo")
+    paciente_1 = cPaciente("Julian", "Naranja")
     paciente_2 = cPaciente("Julian2", "Verde")
     Organizador = cQuesMaestra()
     Organizador.insert(paciente_1)
     Organizador.insert(paciente_2)
     paciente_1.tiempoLlegada = dt.datetime.now() - dt.timedelta(minutes=10)
-    paciente_1.setGravedadMayorPaciente()
     Organizador.Reorganizar()
-    assert 4==4
+    paciente_obtenido=Organizador.Lista_de_colas[0].get()
+    assert paciente_obtenido==paciente_1
+
+def test_cQuesMaestra_Reorganizar_Multiples_Pacientes():
+    Organizador = cQuesMaestra()
+    Lista_Pacientes=[]
+    L_colores=["rojo","naranja","amarillo","verde","azul"]
+    cant=20#seteo el numero de pacientes
+    # AGREGO LOS PACIENTES A UNA LISTA
+    for i in range(0,cant):
+        nombre = ""+str(i)
+        gravedad = random.randint(0,4)
+        pac = cPaciente(nombre,L_colores[gravedad])
+        Lista_Pacientes.append(pac)
+        Organizador.insert(pac)
+
+    for i in range(0,cant):
+        g=Lista_Pacientes[i].getGravedad()
+        t_max = 0
+        if(g==4):
+            t_max = 430
+        elif(g==3):
+            t_max = 190
+        elif(g==2):
+            t_max= 70
+        elif(g==1):
+            t_max=10
+        t_rand = random.randint(0, t_max)
+        Lista_Pacientes[i].tiempoLlegada = dt.datetime.now() - dt.timedelta(minutes=t_rand)
+        Organizador.Reorganizar()
+    #no se me ocurre como se podría testear que se cambio de gravedad un paciente
+
+
+

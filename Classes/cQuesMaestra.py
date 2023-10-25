@@ -22,20 +22,20 @@ class cQuesMaestra:
         self.Lista_de_colas.append(self.AZ)
 
     def Reorganizar(self, indice_lista=4):
-        obj_act = cPaciente()
         if indice_lista == 0:
             return 1
-        try:
-            obj_act = self.Lista_de_colas[indice_lista].queue[0]
-            if obj_act.getTiempoRestante() > obj_act.getTiempoRestanteMayorGravedad():
-                return self.Reorganizar(indice_lista - 1)
-            else:
-                num = obj_act.setGravedadMayorPaciente()
-                obj_act = self.Lista_de_colas[indice_lista].get_nowait()
-                self.Lista_de_colas[num].put_nowait(obj_act)
-                return self.Reorganizar(indice_lista)
-        except:
-            raise cErrorTamanio("Reorganizar")
+        if(self.Lista_de_colas[indice_lista].qsize()==0):
+            return self.Reorganizar(indice_lista - 1)
+        obj_act = self.Lista_de_colas[indice_lista].queue[0]
+        if obj_act.getTiempoRestante() > obj_act.getTiempoRestanteMayorGravedad():
+            return self.Reorganizar(indice_lista - 1)
+        else:
+            num = obj_act.setGravedadMayorPaciente()
+            obj_act = self.Lista_de_colas[indice_lista].get_nowait()
+            self.Lista_de_colas[num].put_nowait(obj_act)
+            print("Al paciente : "+str(obj_act.nombre) +"Se lo cambio a la gravedad"+str(obj_act.getGravedad()))
+            return self.Reorganizar(indice_lista)
+
 
     def insert(self, _paciente):
         try:

@@ -131,3 +131,9 @@ class cPaciente:
             return 1 + self.Funcion_recursiva_gravedades_mayores(tiempo_restante,gravedad_act-1)
         else:
             return 0
+
+    def __eq__(self, other):
+        if (self.getGravedad()==other.getGravedad() and self.tiempoLlegada == other.tiempoLlegada and self.nombre == other.nombre):
+            return True
+        else:
+            return False
