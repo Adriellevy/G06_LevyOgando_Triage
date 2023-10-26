@@ -1,3 +1,4 @@
+from .cEnfermero import cEnfermero
 from .cGravedad import cGravedad
 from .Errores.cErrorPaciente import cErrorPaciente
 from .Errores.cErrorGravedad import cErrorGravedad
@@ -5,10 +6,12 @@ import datetime as dt
 
 
 class cPaciente:
-    def __init__(self, _nombre, color):
-        self.gravedad = cGravedad(color)
+    def __init__(self, _nombre, _color,_casoClinico,_enfermero):
+        self.gravedad = cGravedad(_color)
         self.nombre = _nombre
         self.tiempoLlegada = dt.datetime.now()
+        self.casoClinico=_casoClinico
+        self.enfermero_quien_categorizo=_enfermero
 
     def Atender(self):
         """

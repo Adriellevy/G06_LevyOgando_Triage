@@ -1,5 +1,5 @@
 import queue
-#from cEnfermero import cEnfermero
+from cEnfermero import cEnfermero
 from .cPaciente import cPaciente
 from .Errores.cErrorTamanio import cErrorTamanio
 from .Errores.cErrorGravedad import cErrorGravedad
@@ -13,8 +13,8 @@ class cQuesMaestra:
         self.V = queue.Queue(maxsize=0)
         self.AZ = queue.Queue(maxsize=0)
         self.Lista_de_colas = []
-        #enermero_def = cEnfermero()
-        #L_enfermeros = []
+        enermero_def = cEnfermero()
+        L_enfermeros = []
         self.Lista_de_colas.append(self.R)
         self.Lista_de_colas.append(self.N)
         self.Lista_de_colas.append(self.AM)
@@ -47,3 +47,17 @@ class cQuesMaestra:
             self.Lista_de_colas[num].put_nowait(_paciente)
         except cErrorTamanio("Error en el insert") as errorTam:
             print(cErrorTamanio)
+
+    def ObtenerProximo(self):
+        if(self.R.qsize()>0):
+            return self.R.get_nowait()
+        elif (self.N.qsize() > 0):
+            return self.N.get_nowait()
+        elif (self.AM.qsize() > 0):
+            return self.AM.get_nowait()
+        elif (self.V.qsize() > 0):
+            return self.V.get_nowait()
+        elif (self.AZ.qsize() > 0):
+            return self.AZ.get_nowait()
+        else:
+            raise cErrorTamanio("No hay pacientes a atender")
