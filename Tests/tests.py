@@ -150,9 +150,38 @@ def test_cQuesMaestra_Reorganizar_Multiples_Pacientes():
     # cambio la gravedad de 3 pacientes que son categoria amarilla a la naranja
     for t in range(4,cant-5,5):
         Lista_Pacientes[t].tiempoLlegada = Lista_Pacientes[t].tiempoLlegada - dt.timedelta(minutes=241)
+    #cambio la gravedad de 3 paciente que son categoría naranja
+    for t in range(1, cant - 5, 5):
+        Lista_Pacientes[t].tiempoLlegada = Lista_Pacientes[t].tiempoLlegada - dt.timedelta(minutes=10)
+
     Organizador.Reorganizar()
     assert Organizador.N.qsize()==7
     assert Organizador.V.qsize()==7
 
+def test_cQuesMaestra_Reorganizar_Multiples_Rojos_Sin_posibilidad_atencion():
+    Organizador = cQuesMaestra()
+    Lista_Pacientes=[]
+    Enum=["rojo","naranja","amarillo","verde","azul"]
+    cant = 20 #seteo el numero de pacientes
+    # AGREGO 20 PACIENTES A UNA LISTA
+    for i in range(0,cant):
+        nombre = ""+str(i) #seteo el nombre de los pacientes
+        gravedad = i%5 #seteo la gravedad de forma que la gravedad de los pacientes es ciclica de 0 a 4
+        pac = cPaciente(nombre,Enum[gravedad]) #El seteo de la gravedad es al estilo enum
+        Lista_Pacientes.append(pac)#agrego al paciente a la listas de pacientes
+        Organizador.insert(pac)#agrego al paciente a
 
+    # cambio la gravedad de 3 pacientes que son categoria azul a la roja
+    for t in range(4, cant - 5, 5):
+        Lista_Pacientes[t].tiempoLlegada = Lista_Pacientes[t].tiempoLlegada - dt.timedelta(minutes=431)
+
+    #cambio la gravedad de 3 pacientes que son categoria amarilla a la roja
+    for j in range(2,cant-5,5):
+        Lista_Pacientes[j].tiempoLlegada = Lista_Pacientes[j].tiempoLlegada - dt.timedelta(minutes=71)
+
+    #cambio la gravedad de 3 paciente que son categoría naranja a roja
+    for t in range(1, cant - 5, 5):
+        Lista_Pacientes[t].tiempoLlegada = Lista_Pacientes[t].tiempoLlegada - dt.timedelta(minutes=10)
+    Organizador.Reorganizar()
+    assert Organizador.R.qsize()==13
 
