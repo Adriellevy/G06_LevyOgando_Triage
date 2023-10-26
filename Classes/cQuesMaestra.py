@@ -1,5 +1,5 @@
 import queue
-from cEnfermero import cEnfermero
+from .cEnfermero import cEnfermero
 from .cPaciente import cPaciente
 from .Errores.cErrorTamanio import cErrorTamanio
 from .Errores.cErrorGravedad import cErrorGravedad
@@ -13,8 +13,6 @@ class cQuesMaestra:
         self.V = queue.Queue(maxsize=0)
         self.AZ = queue.Queue(maxsize=0)
         self.Lista_de_colas = []
-        enermero_def = cEnfermero()
-        L_enfermeros = []
         self.Lista_de_colas.append(self.R)
         self.Lista_de_colas.append(self.N)
         self.Lista_de_colas.append(self.AM)
@@ -33,7 +31,6 @@ class cQuesMaestra:
             num = obj_act.setGravedadMayorPaciente()
             obj_act = self.Lista_de_colas[indice_lista].get_nowait()
             self.Lista_de_colas[num].put_nowait(obj_act)
-            print("Al paciente : "+str(obj_act.nombre) +"Se lo cambio a la gravedad"+str(obj_act.getGravedad()))
             return self.Reorganizar(indice_lista)
 
 

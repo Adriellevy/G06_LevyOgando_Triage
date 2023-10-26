@@ -1,4 +1,4 @@
-from .cEnfermero import cEnfermero
+
 from .cGravedad import cGravedad
 from .Errores.cErrorPaciente import cErrorPaciente
 from .Errores.cErrorGravedad import cErrorGravedad
@@ -6,12 +6,14 @@ import datetime as dt
 
 
 class cPaciente:
-    def __init__(self, _nombre, _color,_casoClinico,_enfermero):
-        self.gravedad = cGravedad(_color)
-        self.nombre = _nombre
-        self.tiempoLlegada = dt.datetime.now()
-        self.casoClinico=_casoClinico
-        self.enfermero_quien_categorizo=_enfermero
+    def __init__(self, nombre, color,edad,casoClinico,enfermero,textohisotrial):
+        self._gravedad = cGravedad(color)
+        self._nombre = nombre
+        self._edad= edad
+        self._tiempoLlegada = dt.datetime.now()
+        self._casoClinico= casoClinico
+        self._enfermero_quien_categorizo=enfermero
+        self._historial=textohisotrial
 
     def Atender(self):
         """
@@ -21,12 +23,49 @@ class cPaciente:
         """
         return 0
 
+    def getHistorial(self):
+        """
+
+        :return: Nombre del paciente
+        """
+        return self._historial
+
+    def getEdad(self):
+        """
+
+        :return: Nombre del paciente
+        """
+        return self._edad
+    def getNombre(self):
+        """
+
+        :return: Nombre del paciente
+        """
+        return self._nombre
+    def getEnfermero(self):
+        """
+
+        :return: devuelvo el enfermero
+        """
+        return self._enfermero_quien_categorizo
+
+    def getCasoClinico(self):
+        """
+
+        :return:
+        caso clinico
+        """
+        return self._casoClinico
+
+    def getTiempoLLegada(self):
+        return self._tiempoLlegada
+
     def getGravedad(self):
         """
         este metodo devuelve el color de la gravedad actual
         :return:
         """
-        return self.gravedad.color
+        return self._gravedad.color
 
     def getTiempoRestante(self):
         """
@@ -37,7 +76,7 @@ class cPaciente:
         """
 
         # Compara las fechas
-        fecha_reciente = self.gravedad.getTiempoGravedadActual()
+        fecha_reciente = self._gravedad.getTiempoGravedadActual()
         fecha_antigua = self.getHaceCuantoLLego()
         if fecha_reciente > fecha_antigua:
             resultado = fecha_reciente - fecha_antigua
@@ -53,7 +92,7 @@ class cPaciente:
             x > 0 si el tiempo de la gravedad es mayor al tiempo que estvuo esperando
             x = 0 si el tiempo de espera fue igual o mayor al de la gravedad mayor
         """
-        fecha_reciente = self.gravedad.getTiempoGravedadMayor()
+        fecha_reciente = self._gravedad.getTiempoGravedadMayor()
         fecha_antigua = self.getHaceCuantoLLego()
         if fecha_reciente > fecha_antigua:
             resultado = fecha_reciente - fecha_antigua
@@ -74,13 +113,17 @@ class cPaciente:
         if t_restante_gravedad_actual <= t_restante_gravedadad_mayor:
             #Se cumple si el tiempo restante de la gravedad actual es menor al de una gravedad mayor
             num = self.gestionar_paciente()
-            self.gravedad.setGravedadMayor(num)
+            self._gravedad.setGravedadMayor(num)
         else:
             raise cErrorPaciente("Error en setGravedadMayorPaciente")
         return self.getGravedad()
 
     def getHaceCuantoLLego(self):
-        return dt.datetime.now()-self.tiempoLlegada
+        return dt.datetime.now()-self._tiempoLlegada
+
+    def setTiempoLlegada(self, tiempo_llegada):
+        """Este metodo lo voy a ir comentando o no dependiendo si estoy testeando funciones"""
+        self._tiempoLlegada = tiempo_llegada
 
     def gestionar_paciente(self):
 
@@ -99,9 +142,9 @@ class cPaciente:
         el tiempo de espera de la gravedad siguiente evaluar cual sería la
         gravedad a la cual saltar
         """
-        tiempo_restante = self.getHaceCuantoLLego() - self.gravedad.getTiempoGravedadActual() - self.gravedad.getTiempoGravedadMayor()
+        tiempo_restante = self.getHaceCuantoLLego() - self._gravedad.getTiempoGravedadActual() - self._gravedad.getTiempoGravedadMayor()
         if(tiempo_restante > dt.timedelta(0)): #si esto se cumple es pq el paciente espero mucho
-            tiempo_restante = self.getHaceCuantoLLego() - self.gravedad.getTiempoGravedadActual()
+            tiempo_restante = self.getHaceCuantoLLego() - self._gravedad.getTiempoGravedadActual()
             try:
                 num = self.Funcion_recursiva_gravedades_mayores(tiempo_restante,self.getGravedad()) #obtengo cuantas gravedades habría que saltear
                 return self.getGravedad() - (num+1)
@@ -128,7 +171,7 @@ class cPaciente:
 
     def Funcion_recursiva_gravedades_mayores(self,tiempo_restante,gravedad_act):
 
-        tiempo_restante = tiempo_restante - self.gravedad.getTiempoGravedadMayor(gravedad_act)
+        tiempo_restante = tiempo_restante - self._gravedad.getTiempoGravedadMayor(gravedad_act)
 
         if(tiempo_restante>dt.timedelta(0)):# si > 0, significa que hay que saltear al menos una gravedad mas
             return 1 + self.Funcion_recursiva_gravedades_mayores(tiempo_restante,gravedad_act-1)
@@ -136,7 +179,7 @@ class cPaciente:
             return 0
 
     def __eq__(self, other):
-        if (self.getGravedad()==other.getGravedad() and self.tiempoLlegada == other.tiempoLlegada and self.nombre == other.nombre):
+        if (self.getGravedad()==other.getGravedad() and self._tiempoLlegada == other._tiempoLlegada and self._nombre == other._nombre):
             return True
         else:
             return False
