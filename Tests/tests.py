@@ -135,31 +135,24 @@ def test_cQuesMaestra_Reorganizar():
 def test_cQuesMaestra_Reorganizar_Multiples_Pacientes():
     Organizador = cQuesMaestra()
     Lista_Pacientes=[]
-    L_colores=["rojo","naranja","amarillo","verde","azul"]
-    cant=20#seteo el numero de pacientes
-    # AGREGO LOS PACIENTES A UNA LISTA
+    Enum=["rojo","naranja","amarillo","verde","azul"]
+    cant = 20 #seteo el numero de pacientes
+    # AGREGO 20 PACIENTES A UNA LISTA
     for i in range(0,cant):
-        nombre = ""+str(i)
-        gravedad = random.randint(0,4)
-        pac = cPaciente(nombre,L_colores[gravedad])
-        Lista_Pacientes.append(pac)
-        Organizador.insert(pac)
-
-    for i in range(0,cant):
-        g=Lista_Pacientes[i].getGravedad()
-        t_max = 0
-        if(g==4):
-            t_max = 430
-        elif(g==3):
-            t_max = 190
-        elif(g==2):
-            t_max= 70
-        elif(g==1):
-            t_max=10
-        t_rand = random.randint(0, t_max)
-        Lista_Pacientes[i].tiempoLlegada = dt.datetime.now() - dt.timedelta(minutes=t_rand)
-        Organizador.Reorganizar()
-    #no se me ocurre como se podría testear que se cambio de gravedad un paciente
+        nombre = ""+str(i) #seteo el nombre de los pacientes
+        gravedad = i%5 #seteo la gravedad de forma que la gravedad de los pacientes es ciclica de 0 a 4
+        pac = cPaciente(nombre,Enum[gravedad]) #El seteo de la gravedad es al estilo enum
+        Lista_Pacientes.append(pac)#agrego al paciente a la listas de pacientes
+        Organizador.insert(pac)#agrego al paciente a
+    #cambio la gravedad de 3 pacientes que son categoria azul a la verde
+    for j in range(2,cant-5,5):
+        Lista_Pacientes[j].tiempoLlegada = Lista_Pacientes[j].tiempoLlegada - dt.timedelta(minutes=61)
+    # cambio la gravedad de 3 pacientes que son categoria amarilla a la naranja
+    for t in range(4,cant-5,5):
+        Lista_Pacientes[t].tiempoLlegada = Lista_Pacientes[t].tiempoLlegada - dt.timedelta(minutes=241)
+    Organizador.Reorganizar()
+    assert Organizador.N.qsize()==7
+    assert Organizador.V.qsize()==7
 
 
 
