@@ -180,6 +180,7 @@ class cPaciente:
             return 0
 
     def __eq__(self, other):
+
         val_2 = self._tiempoLlegada - other._tiempoLlegada
         if (self.getGravedad()==other.getGravedad()) and (val_2<dt.timedelta(milliseconds=100)) and (self._nombre == other._nombre):
             return True
