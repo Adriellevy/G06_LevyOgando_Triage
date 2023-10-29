@@ -8,11 +8,11 @@ class cEnfermero:
     atendidos
     """
 
-    def __init__(self, Nombre, Matricula):
+    def __init__(self, Nombre="def", Matricula="111111"):
         self._nombre = Nombre
         self._Matricula = Matricula
 
-    def getNombre(self):
+    def getNombreEnfermero(self):
         return self._nombre
 
     def getMatricula(self):

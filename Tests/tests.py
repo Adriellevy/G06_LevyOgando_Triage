@@ -200,6 +200,8 @@ def test_lectura_archivo():
     assert paciente_con_triage == cPaciente_aux
 
 
+#Repito todos los mismos test pero con pacientes cargados en la lista_pacientes
+
 
 
 

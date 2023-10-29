@@ -1,1 +1,2 @@
-from .cQuesMaestra import cQuesMaestra
+from Classes.cQuesMaestra import *
+from Classes.cManejoArchivo import cManejoArchivo

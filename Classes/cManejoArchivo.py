@@ -1,35 +1,37 @@
 #import datetime
 
+import os
 import pandas as pd
+from .cEnfermero import cEnfermero
 from .cPaciente import cPaciente
-
 
 class cManejoArchivo:
     def __init__(self, archivo_csv=None):
-        self._archivo_csv = None
-        if (archivo_csv):
+
+        directorio_actual = os.path.dirname(__file__)
+        carpeta_superior = os.path.join(directorio_actual, "..")
+        archivo_csv = os.path.join(carpeta_superior, "lista_pacientes.csv")
+
+        if archivo_csv==None or not os.path.isfile(archivo_csv):
             self._archivo_csv = archivo_csv
-            try:
-                # Intenta cargar el archivo CSV si existe, o crea uno nuevo si no.
-                self._base_de_pacientes = pd.read_csv(archivo_csv)
-            except FileNotFoundError:
-                self._base_de_pacientes = pd.DataFrame(
-                    columns=["Nombre", "Edad", "Gravedad", "Historial", "Enfermero", "Fecha","Caso Clinico"])
-        else:
-
             self._base_de_pacientes = pd.DataFrame(
-                columns=["Nombre", "Edad", "Gravedad", "Historial", "Enfermero", "Fecha","Caso Clinico"])
+                columns=["Nombre", "Edad", "Gravedad", "Historial", "Enfermero", "Fecha", "Caso Clinico"])
+            self.guardar_archivo()  # Guardar el archivo nuevo
 
-    def agregar_paciente(self, cPaciente):
-
+        else:
+            # El archivo ya existe, cargar los datos
+            self._archivo_csv = archivo_csv
+            self._base_de_pacientes = pd.read_csv(self._archivo_csv)
+    def agregar_paciente(self, paciente):
+        enfermero= paciente.getEnfermero()
         nuevo_paciente = pd.DataFrame(
-            {"Nombre": [cPaciente.getNombre()], "Edad": [cPaciente.getEdad()], "Gravedad": [cPaciente.getGravedad()],
-             "Historial": [cPaciente.getHistorial()], "Enfermero": [cPaciente.getEnfermero().getNombre()],
-             "Matricula": [cPaciente.getEnfermero().getMatricula()],
-             "Caso Clinico": [cPaciente.getCasoClinico()],
-             "Fecha": [cPaciente.getTiempoLLegada()]})
+            {"Nombre": [paciente.getNombre()], "Edad": [paciente.getEdad()], "Gravedad": [paciente.getGravedad()],
+             "Historial": [paciente.getHistorial()], "Enfermero": [enfermero.getNombreEnfermero()],
+             "Matricula": [enfermero.getMatricula()],
+             "Caso Clinico": [paciente.getCasoClinico()],
+             "Fecha": [paciente.getTiempoLLegada()]})
         self._base_de_pacientes = pd.concat([self._base_de_pacientes, nuevo_paciente], ignore_index=True)
-        self._base_de_pacientes.to_csv(self._archivo_csv, index=False)
+        self.guardar_archivo()
 
     def buscar_paciente(self, nombre,fecha):
         # Filtra el DataFrame en función del nombre y la fecha
@@ -56,26 +58,29 @@ class cManejoArchivo:
         elif (paciente_data["Gravedad"] == 4):
             _color = "azul"
 
+        #Creo el Objeto Enfermero
+        enfermero = cEnfermero(paciente_data["Enfermero"],paciente_data["Matricula"])
+
         # Crea un objeto cPaciente con los datos extraídos
         paciente = cPaciente(
             paciente_data["Nombre"],
-            _color,
+            _color, #le agrego la clase gravedad
             paciente_data["Edad"],
-            paciente_data["Caso Clinico"],  # Puedes modificar esto si tienes un campo correspondiente
-            paciente_data["Enfermero"],  # Puedes modificar esto si tienes un campo correspondiente
+            paciente_data["Caso Clinico"],
+            enfermero, #le agrego la clase enfermero
             paciente_data["Historial"]
         )
 
         return paciente
 
     def editar_paciente(self, nombre,fecha, nueva_edad, nueva_gravedad, nuevo_historial, nuevo_enfermero):
-        paciente = self.buscar_paciente(nombre,fecha)
+        paciente = self.busqueda_interna(nombre, fecha)
         if paciente is not None:
-            paciente["Edad"] = nueva_edad
-            paciente["Gravedad"] = nueva_gravedad
-            paciente["Historial"] = nuevo_historial
-            paciente["Enfermero"] = nuevo_enfermero
-            self._base_de_pacientes.to_csv(self._archivo_csv, index=False)
+            self._base_de_pacientes.at[paciente.index, "Edad"] = nueva_edad
+            self._base_de_pacientes.at[paciente.index, "Gravedad"] = nueva_gravedad
+            self._base_de_pacientes.at[paciente.index, "Historial"] = nuevo_historial
+            self._base_de_pacientes.at[paciente.index, "Enfermero"] = nuevo_enfermero
+            self.guardar_archivo()  # Guardar el DataFrame actualizado
             return True
         else:
             return False
@@ -84,7 +89,31 @@ class cManejoArchivo:
         try:
             pacientes_otro = pd.read_csv(archivo_csv_otro)
             self._base_de_pacientes = pd.concat([self._base_de_pacientes, pacientes_otro], ignore_index=True)
-            self._base_de_pacientes.to_csv(self._archivo_csv, index=False)
+            self.guardar_archivo()
             return True
         except FileNotFoundError:
             return False
+
+    def guardar_archivo(self):
+        self._base_de_pacientes.to_csv(self._archivo_csv, index=False)
+        print(f"Archivo guardado en {self._archivo_csv}")
+
+    def obtener_indice_paciente(self, nombre, fecha):
+        paciente = self.buscar_paciente(nombre, fecha)
+        if paciente is not None:
+            return paciente.index
+        else:
+            return None
+
+    def busqueda_interna(self, nombre, fecha):
+        # Filtra el DataFrame en función del nombre y la fecha
+        pacientes_filtrados = self._base_de_pacientes[
+            (self._base_de_pacientes["Nombre"] == nombre) & (self._base_de_pacientes["Fecha"] == fecha)
+            ]
+
+        # Si no se encontraron pacientes, devuelve None
+        if pacientes_filtrados.empty:
+            return None
+
+        # Devuelve el DataFrame correspondiente al paciente encontrado
+        return pacientes_filtrados
