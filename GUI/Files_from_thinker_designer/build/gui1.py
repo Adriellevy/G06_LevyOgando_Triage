@@ -46,7 +46,7 @@ image_1 = canvas.create_image(
 image_image_2 = PhotoImage(
     file=relative_to_assets("image_2.png"))
 image_2 = canvas.create_image(
-    131.00000000000045,
+    148.00000000000045,
     162.0,
     image=image_image_2
 )
@@ -126,7 +126,7 @@ image_5 = canvas.create_image(
 image_image_6 = PhotoImage(
     file=relative_to_assets("image_6.png"))
 image_6 = canvas.create_image(
-    451.00000000000045,
+    464.00000000000045,
     76.0,
     image=image_image_6
 )
@@ -243,36 +243,36 @@ canvas.create_text(
     font=("Montserrat Medium", 16 * -1)
 )
 
-canvas.create_rectangle(
-    1106.0000000000005,
-    615.0,
-    1420.0000000000005,
-    885.0,
-    fill="#FFFFFF",
-    outline="")
-
 image_image_12 = PhotoImage(
     file=relative_to_assets("image_12.png"))
 image_12 = canvas.create_image(
-    73.00000000000045,
-    221.0,
+    1263.0000000000005,
+    750.0,
     image=image_image_12
 )
 
 image_image_13 = PhotoImage(
     file=relative_to_assets("image_13.png"))
 image_13 = canvas.create_image(
-    926.0000000000005,
-    662.0,
+    73.00000000000045,
+    221.0,
     image=image_image_13
 )
 
 image_image_14 = PhotoImage(
     file=relative_to_assets("image_14.png"))
 image_14 = canvas.create_image(
+    926.0000000000005,
+    662.0,
+    image=image_image_14
+)
+
+image_image_15 = PhotoImage(
+    file=relative_to_assets("image_15.png"))
+image_15 = canvas.create_image(
     921.0000000000005,
     395.0,
-    image=image_image_14
+    image=image_image_15
 )
 
 canvas.create_rectangle(
@@ -309,20 +309,20 @@ canvas.create_text(
     font=("Montserrat Medium", 16 * -1)
 )
 
-image_image_15 = PhotoImage(
-    file=relative_to_assets("image_15.png"))
-image_15 = canvas.create_image(
-    1142.0000000000005,
-    767.0,
-    image=image_image_15
-)
-
 image_image_16 = PhotoImage(
     file=relative_to_assets("image_16.png"))
 image_16 = canvas.create_image(
-    1285.0000000000005,
+    1142.0000000000005,
     767.0,
     image=image_image_16
+)
+
+image_image_17 = PhotoImage(
+    file=relative_to_assets("image_17.png"))
+image_17 = canvas.create_image(
+    1285.0000000000005,
+    767.0,
+    image=image_image_17
 )
 
 button_image_4 = PhotoImage(
@@ -341,20 +341,20 @@ button_4.place(
     height=24.0
 )
 
-image_image_17 = PhotoImage(
-    file=relative_to_assets("image_17.png"))
-image_17 = canvas.create_image(
-    117.00000000000045,
-    69.0,
-    image=image_image_17
-)
-
 image_image_18 = PhotoImage(
     file=relative_to_assets("image_18.png"))
 image_18 = canvas.create_image(
+    117.00000000000045,
+    69.0,
+    image=image_image_18
+)
+
+image_image_19 = PhotoImage(
+    file=relative_to_assets("image_19.png"))
+image_19 = canvas.create_image(
     72.81015777587936,
     397.76214599609375,
-    image=image_image_18
+    image=image_image_19
 )
 
 canvas.create_text(
@@ -366,12 +366,12 @@ canvas.create_text(
     font=("Montserrat Medium", 16 * -1)
 )
 
-image_image_19 = PhotoImage(
-    file=relative_to_assets("image_19.png"))
-image_19 = canvas.create_image(
+image_image_20 = PhotoImage(
+    file=relative_to_assets("image_20.png"))
+image_20 = canvas.create_image(
     519.0000000000005,
     548.0,
-    image=image_image_19
+    image=image_image_20
 )
 
 entry_image_2 = PhotoImage(
