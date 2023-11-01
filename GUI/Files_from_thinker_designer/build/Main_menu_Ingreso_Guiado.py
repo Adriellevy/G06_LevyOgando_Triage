@@ -6,26 +6,49 @@ import tkinter
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
-from Rojo import EjectuarVentanaRoja
+# from Rojo import EjectuarVentanaRoja
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(
+    r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame0")
 
 global current_window
 
-def relative_to_assets(path: str) -> Path:
+window = tkinter.Tk()
+window.geometry("1440x900")
+window.configure(bg="#F0F0F0")
+
+
+def relative_to_assets_menu_ingreso_guiado(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+
+def relative_to_assets_rojo(path: str) -> Path:
+    ASSETS_PATH = OUTPUT_PATH / Path(
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame4")
+    return ASSETS_PATH / Path(path)
+
+
 def EmpezarCategorizacion(_window):
+    """
+    Para empezar a categorizar empiezo realizando preguntas,
+    Empiezo por las pregutnas que tendría un paciente que requiere de una atencion urgente
+    :param _window:
+    :return:
+    """
     print("button_4 clicked")
 
-    window = tkinter.Toplevel(_window)  # Crea una nueva ventana
-    window.title("Ventana Nueva")
-    window.geometry("680x282")
-    window.configure(bg="#FFFFFF")
+    button_image_1 = PhotoImage(file=relative_to_assets_rojo("button_1.png"))
+    button_image_2 = PhotoImage(file=relative_to_assets_rojo("button_2.png"))
+
+    Ventana_Categorizacion = tkinter.Toplevel(_window)  # Crea una nueva ventana
+    Ventana_Categorizacion.title("Empezar Categorizacion")
+    Ventana_Categorizacion.geometry("680x282")
+    Ventana_Categorizacion.configure(bg="#FFFFFF")
+
 
     canvas = Canvas(
-        window,
+        Ventana_Categorizacion,
         bg="#FFFFFF",
         height=282,
         width=680,
@@ -36,22 +59,22 @@ def EmpezarCategorizacion(_window):
 
     canvas.place(x=0, y=0)
     image_image_1 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
+        file=relative_to_assets_rojo("image_1.png"))
     image_1 = canvas.create_image(
         485.0,
         141.0,
         image=image_image_1
     )
 
-    button_image_1 = PhotoImage(
-        file=relative_to_assets("button_1.png"))
     button_1 = Button(
+        master=Ventana_Categorizacion,
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
         command=lambda: print("button_1 clicked"),
         relief="flat"
     )
+
     button_1.place(
         x=447.576904296875,
         y=120.0,
@@ -59,17 +82,17 @@ def EmpezarCategorizacion(_window):
         height=43.0
     )
 
+
     image_image_2 = PhotoImage(
-        file=relative_to_assets("image_2.png"))
+        file=relative_to_assets_rojo("image_2.png"))
     image_2 = canvas.create_image(
         245.0,
         141.0,
         image=image_image_2
     )
 
-    button_image_2 = PhotoImage(
-        file=relative_to_assets("button_2.png"))
     button_2 = Button(
+        master=Ventana_Categorizacion,
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
@@ -82,7 +105,6 @@ def EmpezarCategorizacion(_window):
         width=75.784423828125,
         height=43.0
     )
-
     canvas.create_text(
         186.0,
         16.0,
@@ -92,26 +114,27 @@ def EmpezarCategorizacion(_window):
         font=("Montserrat SemiBold", 24 * -1)
     )
 
-def Cambiar_a_ventana_Guiado():
-    current_window.destroy()
-    Ejecutar_guiado()
+"""def Cambiar_a_ventana_Guiado():
+    window.destroy()
+    Ejecutar_guiado()"""
 
 
-def Ejecutar_guiado():
-    window = tkinter.Tk()
-    window.geometry("1440x900")
-    window.configure(bg = "#F0F0F0")
-    canvas = Canvas(
-        window,
-        bg = "#F0F0F0",
-        height = 900,
-        width = 1440,
-        bd = 0,
-        highlightthickness = 0,
-        relief = "ridge"
-    )
+def Ingresar_paciente_con_guia():
+    """
+    En esta funcion se ejecuta el GUI general
+    para poder categorzar a un paciente que llego a
+    la sala de espera
+    :return:
+    """
+    canvas = Canvas(window, bg="#F0F0F0",
+                    height=900,
+                    width=1440,
+                    bd=0,
+                    highlightthickness=0,
+                    relief="ridge"
+                    )
 
-    canvas.place(x = 0, y = 0)
+    canvas.place(x=0, y=0)
     canvas.create_rectangle(
         64.0,
         815.0,
@@ -121,7 +144,7 @@ def Ejecutar_guiado():
         outline="")
 
     image_image_1 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_1.png"))
     image_1 = canvas.create_image(
         125.0,
         450.0,
@@ -129,7 +152,7 @@ def Ejecutar_guiado():
     )
 
     image_image_2 = PhotoImage(
-        file=relative_to_assets("image_2.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_2.png"))
     image_2 = canvas.create_image(
         148.0,
         162.0,
@@ -137,7 +160,7 @@ def Ejecutar_guiado():
     )
 
     button_image_1 = PhotoImage(
-        file=relative_to_assets("button_1.png"))
+        file=relative_to_assets_menu_ingreso_guiado("button_1.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
@@ -153,7 +176,7 @@ def Ejecutar_guiado():
     )
 
     image_image_3 = PhotoImage(
-        file=relative_to_assets("image_3.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_3.png"))
     image_3 = canvas.create_image(
         73.0,
         341.0,
@@ -161,7 +184,7 @@ def Ejecutar_guiado():
     )
 
     button_image_2 = PhotoImage(
-        file=relative_to_assets("button_2.png"))
+        file=relative_to_assets_menu_ingreso_guiado("button_2.png"))
     button_2 = Button(
         image=button_image_2,
         borderwidth=0,
@@ -177,7 +200,7 @@ def Ejecutar_guiado():
     )
 
     button_image_3 = PhotoImage(
-        file=relative_to_assets("button_3.png"))
+        file=relative_to_assets_menu_ingreso_guiado("button_3.png"))
     button_3 = Button(
         image=button_image_3,
         borderwidth=0,
@@ -193,7 +216,7 @@ def Ejecutar_guiado():
     )
 
     image_image_4 = PhotoImage(
-        file=relative_to_assets("image_4.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_4.png"))
     image_4 = canvas.create_image(
         115.0,
         825.0,
@@ -201,7 +224,7 @@ def Ejecutar_guiado():
     )
 
     image_image_5 = PhotoImage(
-        file=relative_to_assets("image_5.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_5.png"))
     image_5 = canvas.create_image(
         466.0,
         76.0,
@@ -209,7 +232,7 @@ def Ejecutar_guiado():
     )
 
     entry_image_1 = PhotoImage(
-        file=relative_to_assets("entry_1.png"))
+        file=relative_to_assets_menu_ingreso_guiado("entry_1.png"))
     entry_bg_1 = canvas.create_image(
         940.0,
         73.0,
@@ -229,7 +252,7 @@ def Ejecutar_guiado():
     )
 
     image_image_6 = PhotoImage(
-        file=relative_to_assets("image_6.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_6.png"))
     image_6 = canvas.create_image(
         736.2000122070312,
         72.199951171875,
@@ -246,7 +269,7 @@ def Ejecutar_guiado():
     )
 
     image_image_7 = PhotoImage(
-        file=relative_to_assets("image_7.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_7.png"))
     image_7 = canvas.create_image(
         1253.0,
         73.0,
@@ -254,7 +277,7 @@ def Ejecutar_guiado():
     )
 
     image_image_8 = PhotoImage(
-        file=relative_to_assets("image_8.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_8.png"))
     image_8 = canvas.create_image(
         456.0,
         172.0,
@@ -262,12 +285,12 @@ def Ejecutar_guiado():
     )
 
     button_image_4 = PhotoImage(
-        file=relative_to_assets("button_4.png"))
+        file=relative_to_assets_menu_ingreso_guiado("button_4.png"))
     button_4 = Button(
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda:EmpezarCategorizacion(window),
+        command=lambda: EmpezarCategorizacion(window),
         relief="flat"
     )
     button_4.place(
@@ -278,7 +301,7 @@ def Ejecutar_guiado():
     )
 
     image_image_9 = PhotoImage(
-        file=relative_to_assets("image_9.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_9.png"))
     image_9 = canvas.create_image(
         117.0,
         69.0,
@@ -286,7 +309,7 @@ def Ejecutar_guiado():
     )
 
     image_image_10 = PhotoImage(
-        file=relative_to_assets("image_10.png"))
+        file=relative_to_assets_menu_ingreso_guiado("image_10.png"))
     image_10 = canvas.create_image(
         72.81015014648438,
         397.76214599609375,
@@ -302,7 +325,10 @@ def Ejecutar_guiado():
         font=("Montserrat Medium", 16 * -1)
     )
 
-    current_window = window
     window.resizable(True, True)
     window.mainloop()
 
+
+if __name__ == '__main__':
+    # Handler()
+    Ingresar_paciente_con_guia()

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Estadisticas import Ejecutar_estadisticas
-from Ingreso_Guiado import Ejecutar_guiado
+from Main_menu_Ingreso_Guiado import Ejecutar_guiado
 
 
 def cambiar_a_ventana1():
