@@ -2,17 +2,21 @@ import tkinter as tk
 from tkinter import ttk
 from Estadisticas import Ejecutar_estadisticas
 from Ingreso_Guiado import Ejecutar_guiado
+
+
 def cambiar_a_ventana1():
     global current_window
     current_window.destroy()
     current_window = Ejecutar_estadisticas()
     current_window.mainloop()
 
+
 def cambiar_a_ventana2():
     global current_window
     current_window.destroy()
     current_window = Ejecutar_guiado()
     current_window.mainloop()
+
 
 def Handler():
     root = tk.Tk()
@@ -38,8 +42,7 @@ def Handler():
     root.mainloop()
     # VentanaRoja()
 
+
 if __name__ == '__main__':
-    #Handler()
-    window=Ejecutar_guiado()
-    window.resizable(True,True)
-    window.mainloop()
+    # Handler()
+    Ejecutar_guiado()

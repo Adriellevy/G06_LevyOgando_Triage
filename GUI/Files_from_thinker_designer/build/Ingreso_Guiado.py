@@ -11,16 +11,91 @@ from Rojo import EjectuarVentanaRoja
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame0")
 
+global current_window
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def EmpezarCategorizacion():
+def EmpezarCategorizacion(_window):
     print("button_4 clicked")
-    global current_window
+
+    window = tkinter.Toplevel(_window)  # Crea una nueva ventana
+    window.title("Ventana Nueva")
+    window.geometry("680x282")
+    window.configure(bg="#FFFFFF")
+
+    canvas = Canvas(
+        window,
+        bg="#FFFFFF",
+        height=282,
+        width=680,
+        bd=0,
+        highlightthickness=0,
+        relief="ridge"
+    )
+
+    canvas.place(x=0, y=0)
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        485.0,
+        141.0,
+        image=image_image_1
+    )
+
+    button_image_1 = PhotoImage(
+        file=relative_to_assets("button_1.png"))
+    button_1 = Button(
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
+    )
+    button_1.place(
+        x=447.576904296875,
+        y=120.0,
+        width=76.784423828125,
+        height=43.0
+    )
+
+    image_image_2 = PhotoImage(
+        file=relative_to_assets("image_2.png"))
+    image_2 = canvas.create_image(
+        245.0,
+        141.0,
+        image=image_image_2
+    )
+
+    button_image_2 = PhotoImage(
+        file=relative_to_assets("button_2.png"))
+    button_2 = Button(
+        image=button_image_2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_2 clicked"),
+        relief="flat"
+    )
+    button_2.place(
+        x=207.576904296875,
+        y=120.0,
+        width=75.784423828125,
+        height=43.0
+    )
+
+    canvas.create_text(
+        186.0,
+        16.0,
+        anchor="nw",
+        text="¿Tiene Politraumatismo?",
+        fill="#000000",
+        font=("Montserrat SemiBold", 24 * -1)
+    )
+
+def Cambiar_a_ventana_Guiado():
     current_window.destroy()
-    VentanaRoja=EjectuarVentanaRoja()
-    VentanaRoja.mainloop()
+    Ejecutar_guiado()
+
 
 def Ejecutar_guiado():
     window = tkinter.Tk()
@@ -192,7 +267,7 @@ def Ejecutar_guiado():
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=EmpezarCategorizacion,
+        command=lambda:EmpezarCategorizacion(window),
         relief="flat"
     )
     button_4.place(
@@ -227,13 +302,7 @@ def Ejecutar_guiado():
         font=("Montserrat Medium", 16 * -1)
     )
 
-    #window.resizable(True, True)
-    #window.mainloop()
+    current_window = window
+    window.resizable(True, True)
+    window.mainloop()
 
-    global current_window
-    if(current_window.tk != window):
-        current_window.destroy()
-        window.resizable(True, True)
-        window.mainloop()
-    else:
-        return window
