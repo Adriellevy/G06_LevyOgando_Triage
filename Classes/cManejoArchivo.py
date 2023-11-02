@@ -2,8 +2,7 @@
 
 import os
 import pandas as pd
-from cEnfermero import *
-
+from .cEnfermero import *
 class cManejoArchivo:
     def __init__(self, archivo_csv=None):
 
@@ -32,45 +31,7 @@ class cManejoArchivo:
         self._base_de_pacientes = pd.concat([self._base_de_pacientes, nuevo_paciente], ignore_index=True)
         self.guardar_archivo()
 
-    def buscar_paciente(self, nombre,fecha):
-        # Filtra el DataFrame en función del nombre y la fecha
-        pacientes_filtrados = self._base_de_pacientes[
-            (self._base_de_pacientes["Nombre"] == nombre) & (self._base_de_pacientes["Fecha"] == fecha)
-            ]
 
-        # Si no se encontraron pacientes, devuelve None
-        if pacientes_filtrados.empty:
-            return None
-
-        # Extrae los datos del primer paciente encontrado
-        paciente_data = pacientes_filtrados.iloc[0]
-
-        _color = 0
-        if(paciente_data["Gravedad"]==0):
-            _color = "rojo"
-        elif(paciente_data["Gravedad"]==1):
-            _color = "naranja"
-        elif (paciente_data["Gravedad"] == 2):
-            _color = "amarillo"
-        elif (paciente_data["Gravedad"] == 3):
-            _color = "verde"
-        elif (paciente_data["Gravedad"] == 4):
-            _color = "azul"
-
-        #Creo el Objeto Enfermero
-        enfermero = cEnfermero(paciente_data["Enfermero"],paciente_data["Matricula"])
-
-        # Crea un objeto cPaciente con los datos extraídos
-        paciente = cPaciente(
-            paciente_data["Nombre"],
-            _color, #le agrego la clase gravedad
-            paciente_data["Edad"],
-            paciente_data["Caso Clinico"],
-            enfermero, #le agrego la clase enfermero
-            paciente_data["Historial"]
-        )
-
-        return paciente
 
     def editar_paciente(self, nombre,fecha, nueva_edad, nueva_gravedad, nuevo_historial, nuevo_enfermero):
         paciente = self.busqueda_interna(nombre, fecha)
@@ -121,3 +82,43 @@ class cManejoArchivo:
         indice_max_valor = self._base_de_pacientes['Caso Clinico'].idxmax()
         caso_clinico_mas_grande = self._base_de_pacientes.loc[indice_max_valor]['Caso Clinico']
         return caso_clinico_mas_grande
+
+    def buscar_en_archivo_paciente(self, nombre,fecha):
+        # Filtra el DataFrame en función del nombre y la fecha
+        pacientes_filtrados = self._base_de_pacientes[
+            (self._base_de_pacientes["Nombre"] == nombre) & (self._base_de_pacientes["Fecha"] == fecha)
+            ]
+
+        # Si no se encontraron pacientes, devuelve None
+        if pacientes_filtrados.empty:
+            return None
+
+        # Extrae los datos del primer paciente encontrado
+        paciente_data = pacientes_filtrados.iloc[0]
+
+        _color = 0
+        if(paciente_data["Gravedad"]==0):
+            _color = "rojo"
+        elif(paciente_data["Gravedad"]==1):
+            _color = "naranja"
+        elif (paciente_data["Gravedad"] == 2):
+            _color = "amarillo"
+        elif (paciente_data["Gravedad"] == 3):
+            _color = "verde"
+        elif (paciente_data["Gravedad"] == 4):
+            _color = "azul"
+
+        #Creo el Objeto Enfermero
+        enfermero = cEnfermero(paciente_data["Enfermero"],paciente_data["Matricula"])
+
+        # Crea un objeto cPaciente con los datos extraídos
+        paciente = cPaciente(
+            paciente_data["Nombre"],
+            _color, #le agrego la clase gravedad
+            paciente_data["Edad"],
+            paciente_data["Caso Clinico"],
+            enfermero, #le agrego la clase enfermero
+            paciente_data["Historial"]
+        )
+
+        return paciente

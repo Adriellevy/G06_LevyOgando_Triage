@@ -1,6 +1,5 @@
 from .cPaciente import cPaciente
 
-
 class cEnfermero:
     """
     Esta clase tiene como objetivo dar a conocer el/la enfermer@ de triage que se encargo de
@@ -11,6 +10,8 @@ class cEnfermero:
     def __init__(self, Nombre="def", Matricula="111111"):
         self._nombre = Nombre
         self._Matricula = Matricula
+
+
 
     def getNombreEnfermero(self):
         return self._nombre
@@ -23,7 +24,8 @@ class cEnfermero:
         toda esta informacion viene de la interfaz del usario, y el usuario que agendo
         :param:
         :return:
-        cPaciente_sinGravedadClasificado
+            Se agrego al paciente a la base de datos
         """
         NuevoPaciente = cPaciente(_nombre, _color,edad,_casoClinico,self,textohisotrial)
-        return NuevoPaciente
+        return cPaciente
+

@@ -1,5 +1,5 @@
 import queue
-from .cEnfermero import *
+from .cManejoArchivo import *
 from .Errores.cErrorTamanio import cErrorTamanio
 from .Errores.cErrorGravedad import cErrorGravedad
 from .Errores.cErrorPaciente import cErrorPaciente
@@ -17,6 +17,7 @@ class cQuesMaestra:
         self.Lista_de_colas.append(self.AM)
         self.Lista_de_colas.append(self.V)
         self.Lista_de_colas.append(self.AZ)
+        self.Handler = cManejoArchivo()
 
     def Reorganizar(self, indice_lista=4):
         if indice_lista == 0:
@@ -41,7 +42,6 @@ class cQuesMaestra:
             except cErrorGravedad("En el insert") as err:
                 num = _paciente.setGravedadMayorPaciente()
             self.Lista_de_colas[num].put_nowait(_paciente)
-            print("Se lo ingreso en : "+num)
         except cErrorTamanio("Error en el insert") as errorTam:
             print(cErrorTamanio)
 
@@ -58,3 +58,7 @@ class cQuesMaestra:
             return self.AZ.get_nowait()
         else:
             raise cErrorTamanio("No hay pacientes a atender")
+
+    def AtenderProximo(self):
+        """En este metodo guasrdamos en el archivo al paciente mas importante"""
+        self.Handler.agregar_paciente(self.ObtenerProximo())

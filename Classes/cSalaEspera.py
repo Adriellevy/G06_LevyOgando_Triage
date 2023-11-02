@@ -1,8 +1,5 @@
-from .cEnfermero import *
+
 from Classes.cQuesMaestra import *
-from Classes.cManejoArchivo import cManejoArchivo
-from Classes import cPaciente_sinGravedad
-from Classes import cPaciente
 from .Errores.cErrorSalaEspera import cErrorSalaEspera
 import datetime as dt
 class cSalaEspera:
@@ -14,6 +11,8 @@ class cSalaEspera:
         self.Sala_Espera = []
         self.Num_ulitmo_caso_clinico=self.HandlerArchivos.BusquedaUltimo()
         self.Iniciosesion()
+
+
 
     def Pacientes_sin_Clasificar(self,paciente):
         self.Sala_Espera.append(paciente)
@@ -38,8 +37,7 @@ class cSalaEspera:
         self.Lista_pacientes.insert(pac)
 
     def AtenderProximo(self):
-        paciente = self.Lista_pacientes.ObtenerProximo()
-        paciente.atender()
+        self.Lista_pacientes.AtenderProximo()
 
     def generar_Paciente_sin_gravedad(self,edad,textoHistorial):
         self.Num_ulitmo_caso_clinico= self.Num_ulitmo_caso_clinico+1

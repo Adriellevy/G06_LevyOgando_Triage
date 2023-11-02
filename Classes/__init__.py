@@ -1,2 +1,2 @@
-#from Classes.cSalaEspera import *
-#from Classes.cManejoArchivo import cManejoArchivo
+from Classes.cSalaEspera import *
+from Classes.cManejoArchivo import cManejoArchivo

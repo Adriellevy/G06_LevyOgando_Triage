@@ -1008,6 +1008,10 @@ def Ingreso_ya_clasificado(color):
 
 def Agregar_paciente_clasificado(nombre,color):
     Sala_de_espera.Pacientes_Clasificados(color,nombre,"18","Unkown")
+    Atender_paciente_clasificado()
+
+def Atender_paciente_clasificado():
+    Sala_de_espera.AtenderProximo()
 
 def Agregar_paciente_sin_clasificar():
     """

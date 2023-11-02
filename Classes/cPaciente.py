@@ -1,7 +1,5 @@
-import datetime
-from cPaciente_sinGravedad import cPaciente_sinGravedad
-from cGravedad import cGravedad
-from cManejoArchivo import cManejoArchivo
+from .cPaciente_sinGravedad import *
+from .cGravedad import cGravedad
 from .Errores.cErrorPaciente import cErrorPaciente
 from .Errores.cErrorGravedad import cErrorGravedad
 import datetime as dt
@@ -12,17 +10,9 @@ class cPaciente(cPaciente_sinGravedad):
         super().__init__(edad,casoClinico,enfermero,textohisotrial)
         self._nombre=nombre
         self._gravedad = cGravedad(color)
-        self.handler = cManejoArchivo()
 
-
-    def Atender(self):
-        """
-        Esta funcion guarda al paciente en el archivo csv como si fuera una "base" de datos
-        :return:
-        null
-        """
-        self.handler.agregar_paciente(self)
-
+    def getNombre(self):
+        return self._nombre
     def getGravedad(self):
         """
         este metodo devuelve el color de la gravedad actual
