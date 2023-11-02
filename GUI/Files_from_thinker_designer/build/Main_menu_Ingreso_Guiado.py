@@ -315,7 +315,7 @@ def Rojo(_window,button_image_1,button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"rojo"),
         relief="flat"
     )
     button_1.place(
@@ -391,7 +391,7 @@ def Naranja(_window, button_image_1, button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"Naranja"),
         relief="flat"
     )
     button_1.place(
@@ -468,7 +468,7 @@ def Amarillo(_window, button_image_1, button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"Amarillo"),
         relief="flat"
     )
     button_1.place(
@@ -544,7 +544,7 @@ def Verde(_window, button_image_1, button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"Verde"),
         relief="flat"
     )
     button_1.place(
@@ -591,10 +591,13 @@ def Verde(_window, button_image_1, button_image_2):
     )
 
 def Abrir_menu_ingreso_datos_cargados(_window,color):
-    print("Botton No Naranja Apretado")
+    #print("Boton No de Naranja Apretado")
     global Father_off_windows
-    _window.destroy()  # destruyo la ventana anterior
-    Father_off_windows.destroy()
+    if(_window == Father_off_windows):
+        _window.destroy()  # destruyo la ventana anterior
+    else:
+        _window.destroy()
+        Father_off_windows.destroy()
     Ingreso_ya_clasificado(color)
 
 def Ingreso_ya_clasificado(color):
