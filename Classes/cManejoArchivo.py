@@ -2,8 +2,7 @@
 
 import os
 import pandas as pd
-from .cEnfermero import cEnfermero
-from .cPaciente import cPaciente
+from cEnfermero import *
 
 class cManejoArchivo:
     def __init__(self, archivo_csv=None):
@@ -117,3 +116,8 @@ class cManejoArchivo:
 
         # Devuelve el DataFrame correspondiente al paciente encontrado
         return pacientes_filtrados
+
+    def BusquedaUltimo(self):
+        indice_max_valor = self._base_de_pacientes['Caso Clinico'].idxmax()
+        caso_clinico_mas_grande = self._base_de_pacientes.loc[indice_max_valor]['Caso Clinico']
+        return caso_clinico_mas_grande

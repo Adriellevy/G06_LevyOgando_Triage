@@ -23,7 +23,7 @@ class cEnfermero:
         toda esta informacion viene de la interfaz del usario, y el usuario que agendo
         :param:
         :return:
-        cPacienteClasificado
+        cPaciente_sinGravedadClasificado
         """
         NuevoPaciente = cPaciente(_nombre, _color,edad,_casoClinico,self,textohisotrial)
         return NuevoPaciente

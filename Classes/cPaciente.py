@@ -1,20 +1,19 @@
 import datetime
-
-from .cGravedad import cGravedad
+from cPaciente_sinGravedad import cPaciente_sinGravedad
+from cGravedad import cGravedad
+from cManejoArchivo import cManejoArchivo
 from .Errores.cErrorPaciente import cErrorPaciente
 from .Errores.cErrorGravedad import cErrorGravedad
 import datetime as dt
 
 
-class cPaciente:
+class cPaciente(cPaciente_sinGravedad):
     def __init__(self, nombre, color,edad,casoClinico,enfermero,textohisotrial):
+        super().__init__(edad,casoClinico,enfermero,textohisotrial)
+        self._nombre=nombre
         self._gravedad = cGravedad(color)
-        self._nombre = nombre
-        self._edad= edad
-        self._tiempoLlegada = dt.datetime.now()
-        self._casoClinico= casoClinico
-        self._enfermero_quien_categorizo=enfermero
-        self._historial=textohisotrial
+        self.handler = cManejoArchivo()
+
 
     def Atender(self):
         """
@@ -22,44 +21,7 @@ class cPaciente:
         :return:
         null
         """
-        return 0
-
-    def getHistorial(self):
-        """
-
-        :return: Nombre del paciente
-        """
-        return self._historial
-
-    def getEdad(self):
-        """
-
-        :return: Nombre del paciente
-        """
-        return self._edad
-    def getNombre(self):
-        """
-
-        :return: Nombre del paciente
-        """
-        return self._nombre
-    def getEnfermero(self):
-        """
-
-        :return: devuelvo el enfermero
-        """
-        return self._enfermero_quien_categorizo
-
-    def getCasoClinico(self):
-        """
-
-        :return:
-        caso clinico
-        """
-        return self._casoClinico
-
-    def getTiempoLLegada(self):
-        return self._tiempoLlegada
+        self.handler.agregar_paciente(self)
 
     def getGravedad(self):
         """
@@ -118,13 +80,6 @@ class cPaciente:
         else:
             raise cErrorPaciente("Error en setGravedadMayorPaciente")
         return self.getGravedad()
-
-    def getHaceCuantoLLego(self):
-        return dt.datetime.now()-self._tiempoLlegada
-
-    def setTiempoLlegada(self, tiempo_llegada):
-        """Este metodo lo voy a ir comentando o no dependiendo si estoy testeando funciones"""
-        self._tiempoLlegada = tiempo_llegada
 
     def gestionar_paciente(self):
 

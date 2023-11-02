@@ -1,6 +1,5 @@
 import queue
-from .cEnfermero import cEnfermero
-from .cPaciente import cPaciente
+from .cEnfermero import *
 from .Errores.cErrorTamanio import cErrorTamanio
 from .Errores.cErrorGravedad import cErrorGravedad
 from .Errores.cErrorPaciente import cErrorPaciente
@@ -42,6 +41,7 @@ class cQuesMaestra:
             except cErrorGravedad("En el insert") as err:
                 num = _paciente.setGravedadMayorPaciente()
             self.Lista_de_colas[num].put_nowait(_paciente)
+            print("Se lo ingreso en : "+num)
         except cErrorTamanio("Error en el insert") as errorTam:
             print(cErrorTamanio)
 
