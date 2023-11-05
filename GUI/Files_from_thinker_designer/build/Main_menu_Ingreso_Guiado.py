@@ -2,6 +2,9 @@ import sys
 import tkinter as tk
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
 
 sys.path.insert(1,r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\Classes")
 from Classes.cSalaEspera import *
@@ -56,7 +59,7 @@ def relative_to_assets_Verde(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def relative_to_assets_Ingreso_ya_clasificado(path: str) -> Path:
-    ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame1")
+    ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame9")
     return ASSETS_PATH / Path(path)
 
 
@@ -435,7 +438,7 @@ def Naranja(_window, button_image_1, button_image_2):
     )
 
 def Amarillo(_window, button_image_1, button_image_2):
-    print("Botton No Naranja Apretado")
+    print("Boton No Naranja Apretado")
     global Father_off_windows
     _window.destroy() #destruyo la ventana anterior
     Father_off_windows.wm_state('zoomed')
@@ -601,27 +604,44 @@ def Abrir_menu_ingreso_datos_cargados(_window,color):
     Ingreso_ya_clasificado(color)
 
 def Ingreso_ya_clasificado(color):
-    window = tk.Tk()
-    window.geometry("1440x1024")
+    window = Tk()
+
+    window.geometry("1280x720")
     window.configure(bg="#F0F0F0")
 
     canvas = Canvas(
         window,
         bg="#F0F0F0",
-        height=1024,
-        width=1440,
+        height=720,
+        width=1280,
         bd=0,
         highlightthickness=0,
         relief="ridge"
     )
 
     canvas.place(x=0, y=0)
+    canvas.create_rectangle(
+        64.0,
+        815.0,
+        167.0,
+        835.0,
+        fill="#000000",
+        outline="")
+
     image_image_1 = PhotoImage(
         file=relative_to_assets_Ingreso_ya_clasificado("image_1.png"))
     image_1 = canvas.create_image(
-        125.0,
-        450.0,
+        444.0,
+        60.0,
         image=image_image_1
+    )
+
+    image_image_2 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("image_2.png"))
+    image_2 = canvas.create_image(
+        125.0,
+        360.0,
+        image=image_image_2
     )
 
     button_image_1 = PhotoImage(
@@ -634,9 +654,9 @@ def Ingreso_ya_clasificado(color):
         relief="flat"
     )
     button_1.place(
-        x=64.00000000000045,
-        y=152.0,
-        width=168.0,
+        x=64.0,
+        y=328.0,
+        width=158.0,
         height=31.0
     )
 
@@ -650,18 +670,10 @@ def Ingreso_ya_clasificado(color):
         relief="flat"
     )
     button_2.place(
-        x=64.00000000000045,
+        x=64.0,
         y=272.0,
-        width=106.0,
+        width=142.0,
         height=20.0
-    )
-
-    image_image_2 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_2.png"))
-    image_2 = canvas.create_image(
-        73.00000000000045,
-        341.0,
-        image=image_image_2
     )
 
     button_image_3 = PhotoImage(
@@ -674,10 +686,10 @@ def Ingreso_ya_clasificado(color):
         relief="flat"
     )
     button_3.place(
-        x=56.000000000000455,
-        y=328.0,
-        width=166.0,
-        height=31.0
+        x=64.0,
+        y=212.0,
+        width=142.0,
+        height=20.0
     )
 
     button_image_4 = PhotoImage(
@@ -690,212 +702,77 @@ def Ingreso_ya_clasificado(color):
         relief="flat"
     )
     button_4.place(
-        x=64.00000000000045,
-        y=212.0,
-        width=142.0,
+        x=64.0,
+        y=152.0,
+        width=168.0,
         height=20.0
     )
 
     image_image_3 = PhotoImage(
         file=relative_to_assets_Ingreso_ya_clasificado("image_3.png"))
     image_3 = canvas.create_image(
-        115.00000000000045,
-        825.0,
+        115.0,
+        685.0,
         image=image_image_3
     )
 
     image_image_4 = PhotoImage(
         file=relative_to_assets_Ingreso_ya_clasificado("image_4.png"))
     image_4 = canvas.create_image(
-        464.00000000000045,
-        76.0,
+        117.0,
+        69.0,
         image=image_image_4
-    )
-
-    entry_image_1 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("entry_1.png"))
-    entry_bg_1 = canvas.create_image(
-        940.0000000000005,
-        73.0,
-        image=entry_image_1
-    )
-    entry_1 = Entry(
-        bd=0,
-        bg="#DBDBDB",
-        fg="#000716",
-        highlightthickness=0
-    )
-    entry_1.place(
-        x=715.0000000000005,
-        y=48.0,
-        width=450.0,
-        height=48.0
     )
 
     image_image_5 = PhotoImage(
         file=relative_to_assets_Ingreso_ya_clasificado("image_5.png"))
     image_5 = canvas.create_image(
-        736.2000122070317,
-        72.19999694824219,
+        72.81005859375,
+        397.76214599609375,
         image=image_image_5
     )
 
     canvas.create_text(
-        773.0000000000005,
-        65.0,
+        108.0,
+        393.0,
         anchor="nw",
-        text="Search Something",
-        fill="#9A9A9A",
-        font=("Montserrat Medium", 14 * -1)
-    )
-
-    image_image_6 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_6.png"))
-    image_6 = canvas.create_image(
-        1253.0000000000005,
-        73.0,
-        image=image_image_6
+        text="Settings",
+        fill="#FFFFFF",
+        font=("Montserrat Medium", 16 * -1)
     )
 
     canvas.create_text(
-        290.00000000000045,
-        352.0,
+        427.0,
+        436.0,
         anchor="nw",
         text="Distribucion pacientes por gravedad",
         fill="#000000",
         font=("Montserrat SemiBold", 24 * -1)
     )
 
+    canvas.create_text(
+        281.0,
+        407.0,
+        anchor="nw",
+        text="Sala de \nespera",
+        fill="#000000",
+        font=("Montserrat SemiBold", 24 * -1)
+    )
+
+    image_image_6 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("image_6.png"))
+    image_6 = canvas.create_image(
+        1031.0,
+        289.0,
+        image=image_image_6
+    )
+
     image_image_7 = PhotoImage(
         file=relative_to_assets_Ingreso_ya_clasificado("image_7.png"))
     image_7 = canvas.create_image(
-        518.0000000000005,
-        228.0,
+        1031.0,
+        289.0,
         image=image_image_7
-    )
-
-    canvas.create_rectangle(
-        290.00000000000045,
-        735.0,
-        746.0000000000005,
-        927.0,
-        fill="#FFFFFF",
-        outline="")
-
-    canvas.create_rectangle(
-        315.00000000000045,
-        786.0,
-        716.0000000000005,
-        787.0,
-        fill="#E2E2E2",
-        outline="")
-
-    image_image_8 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_8.png"))
-    image_8 = canvas.create_image(
-        926.0000000000005,
-        198.0,
-        image=image_image_8
-    )
-
-    canvas.create_text(
-        797.0000000000005,
-        135.2288818359375,
-        anchor="nw",
-        text="Ingreso Personalizado",
-        fill="#000000",
-        font=("Montserrat Medium", 16 * -1)
-    )
-
-    image_image_9 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_9.png"))
-    image_9 = canvas.create_image(
-        1263.0000000000005,
-        359.0,
-        image=image_image_9
-    )
-
-    canvas.create_text(
-        1131.0000000000005,
-        152.0,
-        anchor="nw",
-        text="Ingreso  Masivo",
-        fill="#000000",
-        font=("Montserrat Medium", 16 * -1)
-    )
-
-    image_image_10 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_10.png"))
-    image_10 = canvas.create_image(
-        1263.0000000000005,
-        750.0,
-        image=image_image_10
-    )
-
-    image_image_11 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_11.png"))
-    image_11 = canvas.create_image(
-        926.0000000000005,
-        662.0,
-        image=image_image_11
-    )
-
-    image_image_12 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_12.png"))
-    image_12 = canvas.create_image(
-        921.0000000000005,
-        395.0,
-        image=image_image_12
-    )
-
-    canvas.create_rectangle(
-        780.0000000000005,
-        355.0,
-        1071.0000000000005,
-        356.0,
-        fill="#DDDDDD",
-        outline="")
-
-    canvas.create_text(
-        855.0000000000005,
-        321.0,
-        anchor="nw",
-        text="Recien Derivados",
-        fill="#000000",
-        font=("Montserrat Medium", 16 * -1)
-    )
-
-    canvas.create_rectangle(
-        1121.0000000000005,
-        674.0,
-        1412.0000000000005,
-        675.0,
-        fill="#DDDDDD",
-        outline="")
-
-    canvas.create_text(
-        1126.0000000000005,
-        639.0,
-        anchor="nw",
-        text="Pacientes Ingresados en el Día",
-        fill="#2A2A2A",
-        font=("Montserrat Medium", 16 * -1)
-    )
-
-    image_image_13 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_13.png"))
-    image_13 = canvas.create_image(
-        1142.0000000000005,
-        767.0,
-        image=image_image_13
-    )
-
-    image_image_14 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_14.png"))
-    image_14 = canvas.create_image(
-        1285.0000000000005,
-        767.0,
-        image=image_image_14
     )
 
     button_image_5 = PhotoImage(
@@ -904,54 +781,188 @@ def Ingreso_ya_clasificado(color):
         image=button_image_5,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Agregar_paciente_clasificado(entry_2.get(),entry_3.get()) ,
+        command=lambda: print("button_5 clicked"),
         relief="flat"
     )
     button_5.place(
-        x=974.0000000000005,
-        y=195.0,
-        width=74.0,
-        height=24.0
+        x=938.173828125,
+        y=254.6649169921875,
+        width=184.4345703125,
+        height=68.4775390625
     )
 
-    image_image_15 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_15.png"))
-    image_15 = canvas.create_image(
-        117.00000000000045,
-        69.0,
-        image=image_image_15
+    image_image_8 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("image_8.png"))
+    image_8 = canvas.create_image(
+        1031.0,
+        123.0,
+        image=image_image_8
     )
 
-    image_image_16 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_16.png"))
-    image_16 = canvas.create_image(
-        72.81015777587936,
-        397.76214599609375,
-        image=image_image_16
+    image_image_9 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("image_9.png"))
+    image_9 = canvas.create_image(
+        1031.0,
+        123.0,
+        image=image_image_9
+    )
+
+    button_image_6 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("button_6.png"))
+    button_6 = Button(
+        image=button_image_6,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_6 clicked"),
+        relief="flat"
+    )
+    button_6.place(
+        x=938.173828125,
+        y=88.6649169921875,
+        width=184.4345703125,
+        height=68.4775390625
+    )
+
+    image_image_10 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("image_10.png"))
+    image_10 = canvas.create_image(
+        395.0,
+        238.0,
+        image=image_image_10
+    )
+
+    image_image_11 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("image_11.png"))
+    image_11 = canvas.create_image(
+        395.0,
+        238.0,
+        image=image_image_11
+    )
+
+    button_image_7 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("button_7.png"))
+    button_7 = Button(
+        image=button_image_7,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_7 clicked"),
+        relief="flat"
+    )
+    button_7.place(
+        x=302.173828125,
+        y=203.6649169921875,
+        width=184.4345703125,
+        height=68.4775390625
+    )
+    #Las posiciones de este rectangulo se tiene que utilizar para poner el grafico
+    #por gravedades
+    Agregar_grafico_pacientes_categorias(window)
+    canvas.create_rectangle(
+        395.0,
+        476.0,
+        881.0,
+        720.0,
+        fill="#F0F0F0",
+        outline="")
+
+    #La posicion de este rectangulo se va a utilizar para poner el grafico total de la sala
+    #De espera
+    #Yellow
+    Agregar_Grafico_Pacientes_en_sala(window)
+    canvas.create_rectangle(
+        267.0,
+        473.0,
+        378.0,
+        720.0,
+        fill="#F0F0F0",
+        outline="")
+
+
+
+    canvas.create_text(
+        906.0,
+        438.0,
+        anchor="nw",
+        text="Ultimos pacientes derivados  ",
+        fill="#000000",
+        font=("Montserrat SemiBold", 24 * -1)
+    )
+    #La posicion de este grafico se tienen que poner los pacientes que ya fueron guardados
+    canvas.create_rectangle(
+        894.0,
+        476.0,
+        1266.0,
+        640.0,
+        fill="red",
+        outline="")
+
+    image_image_12 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("image_12.png"))
+    image_12 = canvas.create_image(
+        725.0,
+        256.0,
+        image=image_image_12
     )
 
     canvas.create_text(
-        108.00001525878952,
-        393.0,
+        608.0,
+        134.0,
         anchor="nw",
-        text="Settings",
-        fill="#FFFFFF",
-        font=("Montserrat Medium", 16 * -1)
+        text="Clasificacion Personalizada",
+        fill="#000000",
+        font=("MontserratRoman SemiBold", 16 * -1)
     )
 
-    image_image_17 = PhotoImage(
-        file=relative_to_assets_Ingreso_ya_clasificado("image_17.png"))
-    image_17 = canvas.create_image(
-        519.0000000000005,
-        548.0,
-        image=image_image_17
+    button_image_8 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("button_8.png"))
+    button_8 = Button(
+        image=button_image_8,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_8 clicked"),
+        relief="flat"
+    )
+    button_8.place(
+        x=776.0,
+        y=257.0,
+        width=94.0,
+        height=24.0
+    )
+
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        664.0,
+        193.5,
+        image=entry_image_1
+    )
+    entry_1 = Entry(
+        bd=0,
+        bg="#F3F3F3",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_1.place(
+        x=603.5,
+        y=183.0,
+        width=121.0,
+        height=19.0
+    )
+
+    canvas.create_text(
+        600.0,
+        161.0,
+        anchor="nw",
+        text="Nombre y Apellido",
+        fill="#000000",
+        font=("Montserrat Medium", 16 * -1)
     )
 
     entry_image_2 = PhotoImage(
         file=relative_to_assets_Ingreso_ya_clasificado("entry_2.png"))
     entry_bg_2 = canvas.create_image(
-        865.0000000000005,
-        194.5,
+        664.0,
+        248.5,
         image=entry_image_2
     )
     entry_2 = Entry(
@@ -961,17 +972,17 @@ def Ingreso_ya_clasificado(color):
         highlightthickness=0
     )
     entry_2.place(
-        x=804.5000000000005,
-        y=184.0,
+        x=603.5,
+        y=238.0,
         width=121.0,
         height=19.0
     )
 
     canvas.create_text(
-        801.0000000000005,
-        163.0,
+        600.0,
+        217.0,
         anchor="nw",
-        text="Nombre",
+        text="Edad",
         fill="#000000",
         font=("Montserrat Medium", 16 * -1)
     )
@@ -979,8 +990,8 @@ def Ingreso_ya_clasificado(color):
     entry_image_3 = PhotoImage(
         file=relative_to_assets_Ingreso_ya_clasificado("entry_3.png"))
     entry_bg_3 = canvas.create_image(
-        865.0000000000005,
-        247.0,
+        664.0,
+        304.5,
         image=entry_image_3
     )
     entry_3 = Entry(
@@ -990,21 +1001,60 @@ def Ingreso_ya_clasificado(color):
         highlightthickness=0
     )
     entry_3.place(
-        x=806.0000000000005,
-        y=235.0,
+        x=603.5,
+        y=294.0,
+        width=121.0,
+        height=19.0
+    )
+
+    canvas.create_text(
+        600.0,
+        273.0,
+        anchor="nw",
+        text="Sector",
+        fill="#000000",
+        font=("Montserrat Medium", 16 * -1)
+    )
+
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets_Ingreso_ya_clasificado("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        664.0,
+        365.0,
+        image=entry_image_4
+    )
+    entry_4 = Entry(
+        bd=0,
+        bg="#F3F3F3",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_4.place(
+        x=605.0,
+        y=353.0,
         width=118.0,
         height=22.0
     )
-    entry_3.insert(0, color)
 
     canvas.create_text(
-        798.0000000000005,
-        219.0,
+        597.0,
+        332.0,
         anchor="nw",
         text="Gravedad",
         fill="#000000",
         font=("Montserrat Medium", 16 * -1)
     )
+
+    canvas.create_text(
+        606.0,
+        852.0,
+        anchor="nw",
+        text="en  sala de espera",
+        fill="#000000",
+        font=("Montserrat SemiBold", 24 * -1)
+    )
+
+    entry_4.insert(0,color)
 
     window.resizable(True, True)
     window.mainloop()
@@ -1022,9 +1072,114 @@ def Agregar_paciente_sin_clasificar():
     este no fue categorizado
     :return:
     """
+
+    # el Texto Hisotrial se tendría que buscar en la base de datos del hospital para poder mostrarle al
+    # enfero del triage elementos relevantes
     paciente = Sala_de_espera.generar_Paciente_sin_gravedad("20","",)
     Sala_de_espera.Pacientes_sin_Clasificar(paciente)
+
+def Agregar_Grafico_Pacientes_en_sala(window):
+    # Datos para el gráfico de barras
+    pacientes = ['']
+    total = 25
+    pacientes_sin_categorizar = 15
+    pacientes_categorizados = 10
+    valores1 = [pacientes_sin_categorizar]
+    valores2 = [pacientes_categorizados]
+
+    # Crear una figura de Matplotlib
+    fig = plt.Figure(figsize=(2, 5), dpi=100)
+    ax = fig.add_subplot(111)
+
+    # Personalizar los colores de las barras
+    color1 = '#F3F3F3'
+    color2 = '#37B3E2'
+    bar_width = 0.20
+
+
+    ax.bar(pacientes, valores1, width=bar_width, color=color1)
+    ax.bar(pacientes, valores2, width=bar_width, color=color2, bottom=valores1)
+
+    # Agregar una leyenda
+    ax.legend(frameon=False)
+
+    # Ocultar ejes y líneas de cuadrícula
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.xaxis.set_ticks_position('none')
+    ax.yaxis.set_ticks_position('none')
+
+
+    # Establecer el límite del eje x para centrar la barra
+    ax.set_xlim(-0.25, 0.15)
+    # Desplazar el eje vertical hacia la derecha
+    ax.spines['left'].set_position(('data', -0.1))
+    # Definir las coordenadas del rectángulo
+    x1, y1, x2, y2 = 277.0, 473.0, 378.0, 690.0
+
+    # Obtener las dimensiones del rectángulo
+    rect_width = x2 - x1
+    rect_height = y2 - y1
+
+    # Obtener el tamaño de la figura en función de las dimensiones del rectángulo
+    fig_width = rect_width
+    fig_height = rect_height
+
+    canvas = FigureCanvasTkAgg(fig, master=window)
+    # Posicionar el lienzo dentro del rectángulo
+    canvas.get_tk_widget().place(x=x1, y=y1, width=fig_width, height=fig_height)
+
+    return canvas
+
+def Agregar_grafico_pacientes_categorias(window):
+    # Datos para el gráfico de barras
+    categorias = ['Rojo', 'Naranja', 'Amarillo', 'Verde', 'Azul']
+    valores1 = [1, 2, 0, 3, 5]
+
+    # Crear una figura de Matplotlib
+    fig = plt.Figure(figsize=(5, 4), dpi=100)
+    ax = fig.add_subplot(111)
+
+    # Personalizar los colores de las barras
+    colors = ["red", "orange", "yellow", "green", "blue"]
+    bar_width = 0.35
+
+    ax.bar(categorias, valores1, width=bar_width, color=colors, label='')
+
+    # Agregar una leyenda
+    ax.legend(frameon=False)
+    # Ocultar ejes y líneas de cuadrícula
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.xaxis.set_ticks_position('none')
+    ax.yaxis.set_ticks_position('none')
+
+    # Crear un lienzo para mostrar la figura en la ventana
+    canvas = FigureCanvasTkAgg(fig, master=window)
+
+    #ax.spines['left'].set_position(('data', -0.1))
+    # Definir las coordenadas del rectángulo
+    x1, y1, x2, y2 = 395.0, 476.0, 881.0, 690.0,
+
+    # Obtener las dimensiones del rectángulo
+    rect_width = x2 - x1
+    rect_height = y2 - y1
+
+    # Obtener el tamaño de la figura en función de las dimensiones del rectángulo
+    fig_width = rect_width
+    fig_height = rect_height
+
+    canvas = FigureCanvasTkAgg(fig, master=window)
+    # Posicionar el lienzo dentro del rectángulo
+    canvas.get_tk_widget().place(x=x1, y=y1, width=fig_width, height=fig_height)
+
 
 if __name__ == '__main__':
     # Handler()
     Ingresar_paciente_con_guia()
+
+

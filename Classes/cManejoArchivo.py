@@ -56,7 +56,7 @@ class cManejoArchivo:
 
     def guardar_archivo(self):
         self._base_de_pacientes.to_csv(self._archivo_csv, index=False)
-        print(f"Archivo guardado en {self._archivo_csv}")
+        print(f"Archivo con paciente derivado guardado en {self._archivo_csv}")
 
     def obtener_indice_paciente(self, nombre, fecha):
         paciente = self.buscar_paciente(nombre, fecha)
