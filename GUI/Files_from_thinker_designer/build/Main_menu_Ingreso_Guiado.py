@@ -1,69 +1,76 @@
 import sys
 import tkinter as tk
 from pathlib import Path
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, ttk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-
-sys.path.insert(1,r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\Classes")
+sys.path.insert(1, r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\Classes")
 from Classes.cSalaEspera import *
 
-#--------------------------Variables Globales---------------------------------
+# --------------------------Variables Globales---------------------------------
 
-#-- Path's--
+# -- Path's--
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(
     r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame0")
 
 global Father_off_windows
 
-#-- Ventana de Ejecucion --
-window = tk.Tk()
-window.geometry("1440x900")
-window.configure(bg="#F0F0F0")
 
-#-- Imagenes de Bottones --
+# -- Imagenes de Bottones --
 button_image_1 = None
 button_image_2 = None
 button_image_3 = None
 button_image_4 = None
 
-#----- Ventanas -----
+# ----- Ventanas -----
 Ventana_aux = None
+grafico_categorias_creado = False
+canvas_grafico_pacientes_categorias_aux=None
 
-#--- cSalaEspera ---
+grafico_sala_espera_creado = False
+canvas_grafico_pacientes_sala_espera_aux=None
+# --- cSalaEspera ---
 Sala_de_espera = cSalaEspera()
 
-#------------------------------Metodosaccesorios----------------------------
+
+# ------------------------------Metodosaccesorios----------------------------
 def relative_to_assets_menu_ingreso_guiado(path: str) -> Path:
     return ASSETS_PATH / Path(path)
+
 
 def relative_to_assets_rojo(path: str) -> Path:
     ASSETS_PATH = OUTPUT_PATH / Path(
         r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame4")
     return ASSETS_PATH / Path(path)
 
+
 def relative_to_assets_amarillo(path: str) -> Path:
     ASSETS_PATH = OUTPUT_PATH / Path(
         r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame6")
     return ASSETS_PATH / Path(path)
 
+
 def relative_to_assets_naranja(path: str) -> Path:
-    ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame5")
+    ASSETS_PATH = OUTPUT_PATH / Path(
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame5")
     return ASSETS_PATH / Path(path)
 
 
 def relative_to_assets_Verde(path: str) -> Path:
-    ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame7")
+    ASSETS_PATH = OUTPUT_PATH / Path(
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame7")
     return ASSETS_PATH / Path(path)
+
 
 def relative_to_assets_Ingreso_ya_clasificado(path: str) -> Path:
-    ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame9")
+    ASSETS_PATH = OUTPUT_PATH / Path(
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame9")
     return ASSETS_PATH / Path(path)
 
 
-#------------------------------ Ventanas ----------------------------
+# ------------------------------ Ventanas ----------------------------
 
 def Ingresar_paciente_con_guia():
     """
@@ -72,6 +79,11 @@ def Ingresar_paciente_con_guia():
     la sala de espera
     :return:
     """
+
+    # -- Ventana de Ejecucion --
+    window = tk.Tk()
+    window.geometry("1440x900")
+    window.configure(bg="#F0F0F0")
 
     button_image_ventana_rojo_1 = PhotoImage(file=relative_to_assets_rojo("button_1.png"))
     button_image_ventana_rojo_2 = PhotoImage(file=relative_to_assets_rojo("button_2.png"))
@@ -240,7 +252,7 @@ def Ingresar_paciente_con_guia():
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Rojo(window,button_image_ventana_rojo_1,button_image_ventana_rojo_2),
+        command=lambda: Rojo(window, button_image_ventana_rojo_1, button_image_ventana_rojo_2),
         relief="flat"
     )
     button_4.place(
@@ -278,7 +290,8 @@ def Ingresar_paciente_con_guia():
     window.resizable(True, True)
     window.mainloop()
 
-def Rojo(_window,button_image_1,button_image_2):
+
+def Rojo(_window, button_image_1, button_image_2):
     global Father_off_windows
     """
     Para empezar a categorizar empiezo realizando preguntas,
@@ -287,7 +300,7 @@ def Rojo(_window,button_image_1,button_image_2):
     :return:
     """
     print("button_4 clicked")
-        # Creo una nueva ventana
+    # Creo una nueva ventana
 
     ventana_roja = tk.Toplevel(_window)
     Father_off_windows = _window
@@ -318,7 +331,7 @@ def Rojo(_window,button_image_1,button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"rojo"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window, "rojo"),
         relief="flat"
     )
     button_1.place(
@@ -327,7 +340,6 @@ def Rojo(_window,button_image_1,button_image_2):
         width=76.784423828125,
         height=43.0
     )
-
 
     image_image_2 = PhotoImage(
         file=relative_to_assets_rojo("image_2.png"))
@@ -360,10 +372,11 @@ def Rojo(_window,button_image_1,button_image_2):
         font=("Montserrat SemiBold", 24 * -1)
     )
 
+
 def Naranja(_window, button_image_1, button_image_2):
     print("button_4 clicked")
     global Father_off_windows
-    _window.destroy() #destruyo la ventana anterior
+    _window.destroy()  # destruyo la ventana anterior
     Father_off_windows.wm_state('zoomed')
     Ventana_naranja = tk.Toplevel(Father_off_windows)  # Crea una nueva ventana con el padre de menu
     Ventana_naranja.title("Es Naranja?")
@@ -394,7 +407,7 @@ def Naranja(_window, button_image_1, button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"Naranja"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window, "Naranja"),
         relief="flat"
     )
     button_1.place(
@@ -418,7 +431,7 @@ def Naranja(_window, button_image_1, button_image_2):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Amarillo(Ventana_naranja,button_image_1,button_image_2),
+        command=lambda: Amarillo(Ventana_naranja, button_image_1, button_image_2),
         relief="flat"
     )
     button_2.place(
@@ -437,10 +450,11 @@ def Naranja(_window, button_image_1, button_image_2):
         font=("MontserratRoman Medium", 24 * -1)
     )
 
+
 def Amarillo(_window, button_image_1, button_image_2):
     print("Boton No Naranja Apretado")
     global Father_off_windows
-    _window.destroy() #destruyo la ventana anterior
+    _window.destroy()  # destruyo la ventana anterior
     Father_off_windows.wm_state('zoomed')
     Ventana_amarillo = tk.Toplevel(Father_off_windows)  # Crea una nueva ventana con el padre de menu
     Ventana_amarillo.title("Es Amarillo? ")
@@ -471,7 +485,7 @@ def Amarillo(_window, button_image_1, button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"Amarillo"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window, "Amarillo"),
         relief="flat"
     )
     button_1.place(
@@ -494,7 +508,7 @@ def Amarillo(_window, button_image_1, button_image_2):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda:Verde(Ventana_amarillo,button_image_1,button_image_2),
+        command=lambda: Verde(Ventana_amarillo, button_image_1, button_image_2),
         relief="flat"
     )
     button_2.place(
@@ -513,10 +527,11 @@ def Amarillo(_window, button_image_1, button_image_2):
         font=("MontserratRoman Medium", 24 * -1)
     )
 
+
 def Verde(_window, button_image_1, button_image_2):
     print("Botton No Naranja Apretado")
     global Father_off_windows
-    _window.destroy() #destruyo la ventana anterior
+    _window.destroy()  # destruyo la ventana anterior
     Father_off_windows.wm_state('zoomed')
     Ventana_verde = tk.Toplevel(Father_off_windows)  # Crea una nueva ventana con el padre de menu
     Ventana_verde.title("Es verde? ")
@@ -547,7 +562,7 @@ def Verde(_window, button_image_1, button_image_2):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"Verde"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window, "Verde"),
         relief="flat"
     )
     button_1.place(
@@ -557,7 +572,6 @@ def Verde(_window, button_image_1, button_image_2):
         height=43.0
     )
 
-
     image_image_2 = PhotoImage(
         file=relative_to_assets_Verde("image_2.png"))
     image_2 = canvas.create_image(
@@ -566,16 +580,14 @@ def Verde(_window, button_image_1, button_image_2):
         image=image_image_2
     )
 
-
     button_2 = Button(
         master=Ventana_verde,
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: Abrir_menu_ingreso_datos_cargados(_window,"azul"),
+        command=lambda: Abrir_menu_ingreso_datos_cargados(_window, "azul"),
         relief="flat"
     )
-
 
     button_2.place(
         x=436.576904296875,
@@ -593,19 +605,34 @@ def Verde(_window, button_image_1, button_image_2):
         font=("MontserratRoman Medium", 24 * -1)
     )
 
-def Abrir_menu_ingreso_datos_cargados(_window,color):
-    #print("Boton No de Naranja Apretado")
+
+def Abrir_menu_ingreso_datos_cargados(_window, color):
+    # print("Boton No de Naranja Apretado")
     global Father_off_windows
-    if(_window == Father_off_windows):
+    if (_window == Father_off_windows):
         _window.destroy()  # destruyo la ventana anterior
     else:
         _window.destroy()
         Father_off_windows.destroy()
     Ingreso_ya_clasificado(color)
 
+
+def Abrir_menu_ingreso_guiado(_window):
+    print("Boton Ingreso Guiado Apretado")
+    global Father_off_windows
+    if _window == Father_off_windows:
+        _window.destroy()  # destruyo la ventana anterior
+    else:
+        _window.destroy()
+        Father_off_windows.destroy()
+    Ingresar_paciente_con_guia()
+
+
 def Ingreso_ya_clasificado(color):
+    global Father_off_windows
     window = Tk()
 
+    Father_off_windows = window
     window.geometry("1280x720")
     window.configure(bg="#F0F0F0")
 
@@ -698,7 +725,7 @@ def Ingreso_ya_clasificado(color):
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_4 clicked"),
+        command=lambda: Abrir_menu_ingreso_guiado(window),
         relief="flat"
     )
     button_4.place(
@@ -845,7 +872,7 @@ def Ingreso_ya_clasificado(color):
         image=button_image_7,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_7 clicked"),
+        command=lambda: Agregar_paciente_sin_clasificar(window),
         relief="flat"
     )
     button_7.place(
@@ -854,8 +881,8 @@ def Ingreso_ya_clasificado(color):
         width=184.4345703125,
         height=68.4775390625
     )
-    #Las posiciones de este rectangulo se tiene que utilizar para poner el grafico
-    #por gravedades
+    # Las posiciones de este rectangulo se tiene que utilizar para poner el grafico
+    # por gravedades
     Agregar_grafico_pacientes_categorias(window)
     canvas.create_rectangle(
         395.0,
@@ -865,9 +892,9 @@ def Ingreso_ya_clasificado(color):
         fill="#F0F0F0",
         outline="")
 
-    #La posicion de este rectangulo se va a utilizar para poner el grafico total de la sala
-    #De espera
-    #Yellow
+    # La posicion de este rectangulo se va a utilizar para poner el grafico total de la sala
+    # De espera
+    # Yellow
     Agregar_Grafico_Pacientes_en_sala(window)
     canvas.create_rectangle(
         267.0,
@@ -877,8 +904,6 @@ def Ingreso_ya_clasificado(color):
         fill="#F0F0F0",
         outline="")
 
-
-
     canvas.create_text(
         906.0,
         438.0,
@@ -887,7 +912,8 @@ def Ingreso_ya_clasificado(color):
         fill="#000000",
         font=("Montserrat SemiBold", 24 * -1)
     )
-    #La posicion de este grafico se tienen que poner los pacientes que ya fueron guardados
+    # La posicion de este grafico se tienen que poner los pacientes que ya fueron guardados
+    mostrar_datos(window)
     canvas.create_rectangle(
         894.0,
         476.0,
@@ -1054,19 +1080,22 @@ def Ingreso_ya_clasificado(color):
         font=("Montserrat SemiBold", 24 * -1)
     )
 
-    entry_4.insert(0,color)
+    entry_4.insert(0, color)
 
     window.resizable(True, True)
     window.mainloop()
 
-def Agregar_paciente_clasificado(nombre,color):
-    Sala_de_espera.Pacientes_Clasificados(color,nombre,"18","Unkown")
+
+def Agregar_paciente_clasificado(nombre, color):
+    Sala_de_espera.Pacientes_Clasificados(color, nombre, "18", "Unkown")
     Atender_paciente_clasificado()
+
 
 def Atender_paciente_clasificado():
     Sala_de_espera.AtenderProximo()
 
-def Agregar_paciente_sin_clasificar():
+
+def Agregar_paciente_sin_clasificar(window):
     """
     Este metodo simula la llegada de un paciente random a la sala de espera
     este no fue categorizado
@@ -1075,10 +1104,20 @@ def Agregar_paciente_sin_clasificar():
 
     # el Texto Hisotrial se tendría que buscar en la base de datos del hospital para poder mostrarle al
     # enfero del triage elementos relevantes
-    paciente = Sala_de_espera.generar_Paciente_sin_gravedad("20","",)
+    paciente = Sala_de_espera.generar_Paciente_sin_gravedad("20", "", )
     Sala_de_espera.Pacientes_sin_Clasificar(paciente)
+    Agregar_Grafico_Pacientes_en_sala(window)
+    Agregar_grafico_pacientes_categorias(window)
+    mostrar_datos(window)
+
 
 def Agregar_Grafico_Pacientes_en_sala(window):
+    global grafico_sala_espera_creado
+    global canvas_grafico_pacientes_sala_espera_aux
+    # Verificar si el gráfico ya ha sido creado
+    if grafico_sala_espera_creado:
+        # Si el gráfico ya existe, eliminarlo
+        canvas_grafico_pacientes_sala_espera_aux.get_tk_widget().destroy()
     # Datos para el gráfico de barras
     pacientes = ['']
     total = 25
@@ -1096,7 +1135,6 @@ def Agregar_Grafico_Pacientes_en_sala(window):
     color2 = '#37B3E2'
     bar_width = 0.20
 
-
     ax.bar(pacientes, valores1, width=bar_width, color=color1)
     ax.bar(pacientes, valores2, width=bar_width, color=color2, bottom=valores1)
 
@@ -1110,7 +1148,6 @@ def Agregar_Grafico_Pacientes_en_sala(window):
     ax.spines['left'].set_visible(False)
     ax.xaxis.set_ticks_position('none')
     ax.yaxis.set_ticks_position('none')
-
 
     # Establecer el límite del eje x para centrar la barra
     ax.set_xlim(-0.25, 0.15)
@@ -1131,9 +1168,18 @@ def Agregar_Grafico_Pacientes_en_sala(window):
     # Posicionar el lienzo dentro del rectángulo
     canvas.get_tk_widget().place(x=x1, y=y1, width=fig_width, height=fig_height)
 
+    canvas_grafico_pacientes_sala_espera_aux = canvas
     return canvas
 
+
 def Agregar_grafico_pacientes_categorias(window):
+    global grafico_categorias_creado
+    global canvas_grafico_pacientes_categorias_aux
+    # Verificar si el gráfico ya ha sido creado
+    if grafico_categorias_creado:
+        # Si el gráfico ya existe, eliminarlo
+        canvas_grafico_pacientes_categorias_aux.get_tk_widget().destroy()
+
     # Datos para el gráfico de barras
     categorias = ['Rojo', 'Naranja', 'Amarillo', 'Verde', 'Azul']
     valores1 = [1, 2, 0, 3, 5]
@@ -1161,7 +1207,7 @@ def Agregar_grafico_pacientes_categorias(window):
     # Crear un lienzo para mostrar la figura en la ventana
     canvas = FigureCanvasTkAgg(fig, master=window)
 
-    #ax.spines['left'].set_position(('data', -0.1))
+    # ax.spines['left'].set_position(('data', -0.1))
     # Definir las coordenadas del rectángulo
     x1, y1, x2, y2 = 395.0, 476.0, 881.0, 690.0,
 
@@ -1176,10 +1222,54 @@ def Agregar_grafico_pacientes_categorias(window):
     canvas = FigureCanvasTkAgg(fig, master=window)
     # Posicionar el lienzo dentro del rectángulo
     canvas.get_tk_widget().place(x=x1, y=y1, width=fig_width, height=fig_height)
+    canvas_grafico_pacientes_categorias_aux = canvas
+    # Marcar que el gráfico ha sido creado
+    grafico_creado = True
+
+
+def mostrar_datos(window):
+    """
+    Esta funcion se encagar de desplegar en una tabla los ultimos pacientes derivados por los medicos
+    :param window:
+    :return:
+    """
+
+    ultimos_datos = Sala_de_espera.HandlerArchivos.obtener_ultimos_datos()
+    primeros_tres_pacientes = Sala_de_espera.HandlerArchivos.pacientes_buscando_cama().head(3)
+    window.title("Últimos Datos")
+
+    tree = ttk.Treeview(window, columns=(
+        "Nombre", "Edad", "Gravedad", "Historial", "Enfermero", "Fecha", "CasoClinico", "Matricula"), show="headings")
+    tree.heading("Nombre", text="Nombre")
+    tree.heading("Edad", text="Edad")
+    tree.heading("Gravedad", text="Gravedad")
+    tree.heading("Historial", text="Historial")
+    tree.heading("Enfermero", text="Enfermero")
+    tree.heading("Fecha", text="Fecha")
+    tree.heading("CasoClinico", text="Caso Clinico")
+    tree.heading("Matricula", text="Matricula")
+
+    # Aplicar el estilo de línea azul a las filas de pacientes buscando cama
+    tree.tag_configure("line_color", background="#37B3E2")
+    tree.tag_configure("no_line", background="white")
+
+    # Insertar los primeros tres pacientes que buscan cama en el Treeview
+    for _, fila in primeros_tres_pacientes.iterrows():
+        valores = fila.values
+        tree.insert("", "end", values=tuple(valores))
+
+    # Insertar una fila con estilo "line_color" como separador
+    tree.insert("", "end", values=("", "", "", "", "", "", "", ""), tags=("line_color",))
+
+    # Insertar los últimos datos en el Treeview
+    for _, fila in ultimos_datos.iterrows():
+        valores = fila.values
+        tree.insert("", "end", values=tuple(valores))
+
+    tree.grid(row=0, column=0, padx=10, pady=10)
+    tree.place(x=894, y=476, width=372, height=(len(primeros_tres_pacientes) + len(ultimos_datos)) * 30)
 
 
 if __name__ == '__main__':
     # Handler()
     Ingresar_paciente_con_guia()
-
-

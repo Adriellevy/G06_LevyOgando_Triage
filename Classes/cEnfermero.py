@@ -27,5 +27,5 @@ class cEnfermero:
             Se agrego al paciente a la base de datos
         """
         NuevoPaciente = cPaciente(_nombre, _color,edad,_casoClinico,self,textohisotrial)
-        return cPaciente
+        return NuevoPaciente
 

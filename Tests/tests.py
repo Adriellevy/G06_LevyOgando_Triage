@@ -4,7 +4,8 @@ import datetime as dt
 import pytest
 from Classes.cQuesMaestra import *
 from Classes.cManejoArchivo import *
-
+from Classes.cSalaEspera import cSalaEspera
+from Classes import cRandoms
 def test_Error_Insercion_Gravedad():
     """
     Este test tiene que asertar si al paciente se lo instancia con una gravedad distinta a las posibles
@@ -193,15 +194,33 @@ def test_lectura_archivo():
     cPaciente_aux = cPaciente("non", "azul", "0", "-", enfermero,"f")
     paciente_con_triage=enfermero.Clasificar("paciente 1","rojo",6354,9,"lo operaron de la rodillita ")
 
+
     #Trabajo con el operador de archivo
     handler = cManejoArchivo()
     handler.agregar_paciente(paciente_con_triage)
-    cPaciente_aux=handler.buscar_paciente("paciente 1",paciente_con_triage.getTiempoLLegada())
+    cPaciente_aux=handler.buscar_en_archivo_paciente("paciente 1",paciente_con_triage.getTiempoLLegada())
     assert paciente_con_triage == cPaciente_aux
 
+def test_longitudes_sala_espera():
+    sala_de_espera = cSalaEspera()
+    edad = cRandoms.obtener_random_edad()
+    #se debería buscar si ya hay un historial del paciente
+    historial ="Unkown"
+    sala_de_espera.generar_Paciente_sin_gravedad(edad,historial)
+    cant_espera = sala_de_espera.get_cantidad_pacientes_en_sala_espera_sin_clasificar()
+    assert cant_espera == 1
 
-#Repito todos los mismos test pero con pacientes cargados en la lista_pacientes
 
+def test_longitudes_sala_espera():
+    sala_de_espera = cSalaEspera()
+    nombre = cRandoms.obtener_randoms_nombre()
+    edad = cRandoms.obtener_random_edad()
+    color = cRandoms.color_aleatorio()
+    # se debería buscar si ya hay un historial del paciente
+    historial = "Unkown"
 
+    sala_de_espera.generarPaciente(color,nombre,edad,"x",None,historial)
+    cant_espera = sala_de_espera.get_cantidad_pacientes_en_sala_espera_clasificados()
+    assert cant_espera == 1
 
 

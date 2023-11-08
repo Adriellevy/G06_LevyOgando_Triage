@@ -59,6 +59,6 @@ class cQuesMaestra:
         else:
             raise cErrorTamanio("No hay pacientes a atender")
 
-    def AtenderProximo(self):
+    def DerivarProximo(self):
         """En este metodo guasrdamos en el archivo al paciente mas importante"""
         self.Handler.agregar_paciente(self.ObtenerProximo())

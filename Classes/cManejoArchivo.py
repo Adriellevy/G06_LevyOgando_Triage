@@ -122,3 +122,18 @@ class cManejoArchivo:
         )
 
         return paciente
+
+    def obtener_ultimos_datos(self):
+        ultimos_datos = self._base_de_pacientes.tail(5)
+        return ultimos_datos
+
+    def pacientes_buscando_cama(self):
+        """
+        Devuelve una lista de pacientes que están buscando una cama en función del historial.
+        """
+        if "Historial" not in self._base_de_pacientes.columns:
+            # Asegúrate de que la columna "Historial" existe en el DataFrame
+            return []
+
+        pacientes_buscando_cama = self._base_de_pacientes[self._base_de_pacientes["Historial"] == "Buscando Cama"]
+        return pacientes_buscando_cama
