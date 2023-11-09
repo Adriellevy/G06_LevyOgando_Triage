@@ -24,6 +24,8 @@ class cPaciente(cPaciente_sinGravedad):
         """
         return self._gravedad.color
 
+    def getGravedad__(self):
+        return self._gravedad
     def getTiempoRestante(self):
         """
         Este metodo devuelve el tiempo que le queda en esa gravedad asignada

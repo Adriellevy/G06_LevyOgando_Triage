@@ -269,3 +269,135 @@ def test_Nuevo_enfoque_Reorganizar_Multiples_Pacientes():
 
     assert naranja== 7
     assert verde == 7"""
+def teste_Limite_R():
+    Organizador=cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    lim= Organizador.Limite_Color_R()
+    assert lim == 1
+def teste_Limite_N_punta():
+    Organizador=cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    lim= Organizador.Limite_Color_N()
+    assert lim == 2
+
+def teste_Limite_N():
+    Organizador=cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5= cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Amarillo", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim= Organizador.Limite_Color_N()
+    assert lim == 3
+
+
+def teste_limite_AM_limite():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Amarillo", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim = Organizador.Limite_Color_AM()
+    assert lim == 5
+
+
+def teste_limite_AM():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Verde", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim = Organizador.Limite_Color_AM()
+    assert lim == 4
+
+
+def teste_limite_V_limite():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Verde", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    lim = Organizador.Limite_Color_V()
+    assert lim == 5
+
+def teste_limite_V():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+    paciente_4 = cPaciente("juan", "Naranja", 1, None, None, None)
+    paciente_5 = cPaciente("pepe", "Amarillo", 1, None, None, None)
+    paciente_6 = cPaciente("lulu", "Verde", 1, None, None, None)
+    paciente_7 = cPaciente("pepe", "Verde", 1, None, None, None)
+    paciente_8 = cPaciente("lulu", "Azul", 1, None, None, None)
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    Organizador.insert(paciente_4)
+    Organizador.insert(paciente_5)
+    Organizador.insert(paciente_6)
+    Organizador.insert(paciente_7)
+    Organizador.insert(paciente_8)
+    lim = Organizador.Limite_Color_V()
+    assert lim == 6
+
+def test_Reorganizar_gr():
+    Organizador = cNuevoEnfoque
+    paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)
+    paciente_2 = cPaciente("pepe", "rojo", 1, None, None, None)
+    paciente_3 = cPaciente("lulu", "Naranja", 1, None, None, None)
+
+    Organizador = cNuevoEnfoque()
+    Organizador.insert(paciente_1)
+    Organizador.insert(paciente_2)
+    Organizador.insert(paciente_3)
+    lim = Organizador.Limite_Color_R()
+    assert lim == 1
