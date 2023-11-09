@@ -39,7 +39,7 @@ class cPaciente_sinGravedad:
         """
         return self._casoClinico
 
-    def getTiempoLLegada(self):
+    def getTiempoLlegada(self):
         return self._tiempoLlegada
 
 

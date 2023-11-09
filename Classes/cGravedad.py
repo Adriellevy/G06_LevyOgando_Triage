@@ -28,7 +28,7 @@ class cGravedad:
         if (_color == 0):#rojo
             return dt.timedelta(0,0,0,0,0)
         elif (_color == 1):#naranja
-            return dt.timedelta(0,0,0,0,10)
+            return dt.timedelta(0,0,0,0,10,0,0)
         elif (_color == 2):#amarillo
             return dt.timedelta(0, 0, 0, 0, 60)
         elif (_color == 3):#verde

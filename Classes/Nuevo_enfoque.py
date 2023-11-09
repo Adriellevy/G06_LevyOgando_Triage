@@ -3,7 +3,7 @@ from .cManejoArchivo import *
 from .Errores.cErrorTamanio import cErrorTamanio
 from .Errores.cErrorGravedad import cErrorGravedad
 from .Errores.cErrorPaciente import cErrorPaciente
-
+import datetime as dt
 class cNuevoEnfoque:
     def __init__(self):
         self.Lista_de_pacientes = []
@@ -144,26 +144,35 @@ class cNuevoEnfoque:
         """En este metodo guasrdamos en el archivo al paciente mas importante"""
         self.Handler.agregar_paciente(self.ObtenerProximo())
 
-    def Reorganizar_greedy(self):
-        p = self.Lista_de_pacientes.pop(0)
-        fecha = dt.timedelta(0, 0, 0, 0, p.getTiempoLLegada().minute, p.getTiempoLLegada().hour, 0)
-        hora = dt.datetime.now()
-        ahora = dt.timedelta(0, 0, 0, 0, hora.minute, hora.hour, 0)
-        diferencia = (fecha - ahora).total_seconds() / 60
-        if (diferencia > p.getGravedad__.getTiempoGravedadActual()):
-            self.Cambiar_color_greedy(p)
+    def Reorganizar_greedy(self,p):
+
+        if p.getGravedad() !=0:
+            tiempo=p.getTiempoLlegada()
+            fecha = dt.timedelta(0, 0, 0, 0, tiempo.minute, tiempo.hour, 0)
+            hora = dt.datetime.now()
+            ahora = dt.timedelta(0, 0, 0, 0, hora.minute, hora.hour, 0)
+            diferencia = (ahora - fecha).total_seconds() / 60
+            minutos= p.get_tiempo_gravedad()
+            ola=minutos.total_seconds()/60
+
+            if (diferencia > ola):
+                self.Cambiar_color_greedy(p)
+
+
+
 
     def Cambiar_color_greedy(self, p):
-        p.getGravedad__.setGravedadMayor(p.getGravedad() - 1)  # el paciente tiene un nuevo color
+
+        p.set_gravedad(p.getGravedad() - 1)  # el paciente tiene un nuevo color
         self.Cambiar_Paciante_greedy(p)
 
     def Limite_Color_R(self):
-        tam = len(self.Lista_de_pacientes) - 1
+        tam = len(self.Lista_de_pacientes)-1
         if len(self.Lista_de_pacientes) == 0:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 0:
             return 0  # solo hay un paciente rojo
-        if self.Lista_de_pacientes[tam].getGravedad() == 0:
+        if self.Lista_de_pacientes[tam+1].getGravedad() == 0:
             return tam
         elif len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
