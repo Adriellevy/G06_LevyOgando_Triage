@@ -1,4 +1,4 @@
-class cErrorSalaEspera(IndexError):
+class cErrorSalaEspera(BaseException):
     def __init__(self, lugar):
         self.txt = lugar
 

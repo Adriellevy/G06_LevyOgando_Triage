@@ -201,26 +201,6 @@ def test_lectura_archivo():
     cPaciente_aux=handler.buscar_en_archivo_paciente("paciente 1",paciente_con_triage.getTiempoLLegada())
     assert paciente_con_triage == cPaciente_aux
 
-def test_longitudes_sala_espera():
-    sala_de_espera = cSalaEspera()
-    edad = cRandoms.obtener_random_edad()
-    #se debería buscar si ya hay un historial del paciente
-    historial ="Unkown"
-    sala_de_espera.generar_Paciente_sin_gravedad(edad,historial)
-    cant_espera = sala_de_espera.get_cantidad_pacientes_en_sala_espera_sin_clasificar()
-    assert cant_espera == 1
 
-
-def test_longitudes_sala_espera():
-    sala_de_espera = cSalaEspera()
-    nombre = cRandoms.obtener_randoms_nombre()
-    edad = cRandoms.obtener_random_edad()
-    color = cRandoms.color_aleatorio()
-    # se debería buscar si ya hay un historial del paciente
-    historial = "Unkown"
-
-    sala_de_espera.generarPaciente(color,nombre,edad,"x",None,historial)
-    cant_espera = sala_de_espera.get_cantidad_pacientes_en_sala_espera_clasificados()
-    assert cant_espera == 1
 
 

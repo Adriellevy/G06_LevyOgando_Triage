@@ -1,4 +1,4 @@
-class cErrorPaciente(Exception):
+class cErrorPaciente(BaseException):
     def __init__(self, lugar):
         self.txt = lugar
 

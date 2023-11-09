@@ -1,4 +1,4 @@
-class cErrorVentana(IndexError):
+class cErrorVentana(BaseException):
     def __init__(self, lugar):
         self.txt = lugar
 

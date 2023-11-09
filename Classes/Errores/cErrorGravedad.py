@@ -1,4 +1,4 @@
-class cErrorGravedad(Exception):
+class cErrorGravedad(BaseException):
     def __init__(self, lugar):
         self.txt = lugar
 

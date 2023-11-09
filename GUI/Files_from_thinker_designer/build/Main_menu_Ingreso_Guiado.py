@@ -5,7 +5,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, ttk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-sys.path.insert(1, r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\Classes")
+sys.path.insert(1, r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\G06_LevyOgando_Triage\Classes")
 from Classes.cSalaEspera import *
 
 # --------------------------Variables Globales---------------------------------
@@ -13,7 +13,7 @@ from Classes.cSalaEspera import *
 # -- Path's--
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(
-    r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame0")
+    r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\G06_LevyOgando_Triage\GUI\Files_from_thinker_designer\build\assets\frame0")
 
 global Father_off_windows
 
@@ -42,31 +42,31 @@ def relative_to_assets_menu_ingreso_guiado(path: str) -> Path:
 
 def relative_to_assets_rojo(path: str) -> Path:
     ASSETS_PATH = OUTPUT_PATH / Path(
-        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame4")
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\G06_LevyOgando_Triage\GUI\Files_from_thinker_designer\build\assets\frame4")
     return ASSETS_PATH / Path(path)
 
 
 def relative_to_assets_amarillo(path: str) -> Path:
     ASSETS_PATH = OUTPUT_PATH / Path(
-        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame6")
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\G06_LevyOgando_Triage\GUI\Files_from_thinker_designer\build\assets\frame6")
     return ASSETS_PATH / Path(path)
 
 
 def relative_to_assets_naranja(path: str) -> Path:
     ASSETS_PATH = OUTPUT_PATH / Path(
-        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame5")
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\G06_LevyOgando_Triage\GUI\Files_from_thinker_designer\build\assets\frame5")
     return ASSETS_PATH / Path(path)
 
 
 def relative_to_assets_Verde(path: str) -> Path:
     ASSETS_PATH = OUTPUT_PATH / Path(
-        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame7")
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\G06_LevyOgando_Triage\GUI\Files_from_thinker_designer\build\assets\frame7")
     return ASSETS_PATH / Path(path)
 
 
 def relative_to_assets_Ingreso_ya_clasificado(path: str) -> Path:
     ASSETS_PATH = OUTPUT_PATH / Path(
-        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\Triage\GUI\Files_from_thinker_designer\build\assets\frame9")
+        r"C:\Users\Adri\Desktop\Laboratorio de programacion 2\G06_LevyOgando_Triage\GUI\Files_from_thinker_designer\build\assets\frame9")
     return ASSETS_PATH / Path(path)
 
 

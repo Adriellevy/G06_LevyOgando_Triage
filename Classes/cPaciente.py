@@ -6,10 +6,14 @@ import datetime as dt
 
 
 class cPaciente(cPaciente_sinGravedad):
-    def __init__(self, nombre, color,edad,casoClinico,enfermero,textohisotrial):
+    def __init__(self, nombre, color,edad,casoClinico,enfermero,textohisotrial,):
         super().__init__(edad,casoClinico,enfermero,textohisotrial)
         self._nombre=nombre
         self._gravedad = cGravedad(color)
+        HaceCuantoleDuele=[24,48,72]
+        GradoDolor=[1,2,3,4,5,6,7,8,9,10]
+        #ver si poner o no como parametros el grado que seleciono el enfermero en triage
+
 
     def getNombre(self):
         return self._nombre

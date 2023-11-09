@@ -1,4 +1,4 @@
-class cErrorTamanio(IndexError):
+class cErrorTamanio(BaseException):
     def __init__(self, lugar):
         self.txt = lugar
 
