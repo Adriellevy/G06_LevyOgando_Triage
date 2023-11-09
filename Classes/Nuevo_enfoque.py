@@ -143,3 +143,107 @@ class cNuevoEnfoque:
     def DerivarProximo(self):
         """En este metodo guasrdamos en el archivo al paciente mas importante"""
         self.Handler.agregar_paciente(self.ObtenerProximo())
+
+    def Reorganizar_greedy(self):
+        p = self.Lista_de_pacientes.pop(0)
+        fecha = dt.timedelta(0, 0, 0, 0, p.getTiempoLLegada().minute, p.getTiempoLLegada().hour, 0)
+        hora = dt.datetime.now()
+        ahora = dt.timedelta(0, 0, 0, 0, hora.minute, hora.hour, 0)
+        diferencia = (fecha - ahora).total_seconds() / 60
+        if (diferencia > p.getGravedad__.getTiempoGravedadActual()):
+            self.Cambiar_color_greedy(p)
+
+    def Cambiar_color_greedy(self, p):
+        p.getGravedad__.setGravedadMayor(p.getGravedad() - 1)  # el paciente tiene un nuevo color
+        self.Cambiar_Paciante_greedy(p)
+
+    def Limite_Color_R(self):
+        tam = len(self.Lista_de_pacientes) - 1
+        if len(self.Lista_de_pacientes) == 0:
+            raise cErrorTamanio("No hay pacientes a atender")
+        if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 0:
+            return 0  # solo hay un paciente rojo
+        if self.Lista_de_pacientes[tam].getGravedad() == 0:
+            return tam
+        elif len(self.Lista_de_pacientes) > 1:
+            for x in range(tam):
+                if self.Lista_de_pacientes[x].getGravedad() == 0 and self.Lista_de_pacientes[x + 1].getGravedad() != 0:
+                    return x
+        else:
+            raise cErrorTamanio("RARO")
+
+    def Limite_Color_N(self):
+        tam = len(self.Lista_de_pacientes) - 1
+        if len(self.Lista_de_pacientes) == 0:
+            raise cErrorTamanio("No hay pacientes a atender")
+        if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 1:
+            return 0
+        if self.Lista_de_pacientes[tam].getGravedad() == 1:
+            return tam
+        elif len(self.Lista_de_pacientes) > 1:
+            for x in range(tam):
+                if self.Lista_de_pacientes[x].getGravedad() == 1 and self.Lista_de_pacientes[x + 1].getGravedad() != 1:
+                    return x
+        else:
+            raise cErrorTamanio("RARO")
+
+    def Limite_Color_AM(self):
+        tam = len(self.Lista_de_pacientes) - 1
+        if len(self.Lista_de_pacientes) == 0:
+            raise cErrorTamanio("No hay pacientes a atender")
+        if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 2:
+            return 0  # solo hay un paciente rojo
+        if self.Lista_de_pacientes[tam].getGravedad() == 2:
+            return tam
+        elif len(self.Lista_de_pacientes) > 1:
+            for x in range(tam):
+                if self.Lista_de_pacientes[x].getGravedad() == 2 and self.Lista_de_pacientes[x + 1].getGravedad() != 2:
+                    return x
+        else:
+            raise cErrorTamanio("RARO")
+
+    def Limite_Color_V(self):
+        tam = len(self.Lista_de_pacientes) - 1
+        if len(self.Lista_de_pacientes) == 0:
+            raise cErrorTamanio("No hay pacientes a atender")
+        if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 3:
+            return 0  # solo hay un paciente rojo
+        if self.Lista_de_pacientes[tam].getGravedad() == 3:
+            return tam
+        elif len(self.Lista_de_pacientes) > 1:
+            for x in range(tam):
+                if self.Lista_de_pacientes[x].getGravedad() == 3 and self.Lista_de_pacientes[x + 1].getGravedad() != 3:
+                    return x
+        else:
+            raise cErrorTamanio("RARO")
+
+    def Cambiar_Paciante_greedy(self, p):
+        if p.getGravedad() == 0:
+            lim = self.Limite_Color_R()
+            self.Lista_de_pacientes.insert(lim, p)
+        if p.getGravedad() == 1:
+            lim = self.Limite_Color_N()
+            self.Lista_de_pacientes.insert(lim, p)
+        if p.getGravedad() == 2:
+            lim = self.Limite_Color_AM()
+            self.Lista_de_pacientes.insert(lim, p)
+        if p.getGravedad() == 3:
+            lim = self.Limite_Color_V()
+            self.Lista_de_pacientes.insert(lim, p)
+
+    def Insertar_gr(self, p):
+        if p.getGravedad() == 0:
+            lim = self.Limite_Color_R()
+            self.Lista_de_pacientes.insert(lim, p)
+        if p.getGravedad() == 1:
+            lim = self.Limite_Color_N()
+            self.Lista_de_pacientes.insert(lim, p)
+        if p.getGravedad() == 2:
+            lim = self.Limite_Color_AM()
+            self.Lista_de_pacientes.insert(lim, p)
+        if p.getGravedad() == 3:
+            lim = self.Limite_Color_V()
+            self.Lista_de_pacientes.insert(lim, p)
+        else:
+            self.Lista_de_pacientes.append(p)  # es azul
+
