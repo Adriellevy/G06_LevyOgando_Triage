@@ -241,13 +241,13 @@ def test_Nuevo_enfoque_Reorganizar_Multiples_Pacientes():
     # cambio la gravedad de 3 pacientes que son categoria amarilla a la naranja
     for t in range(4, cant - 5, 5):
         Lista_Pacientes[t].setTiempoLlegada(Lista_Pacientes[t].getTiempoLLegada() - dt.timedelta(minutes=241))
-    """ #cambio la gravedad de 3 paciente que son categoría naranja
+     #cambio la gravedad de 3 paciente que son categoría naranja
     for t in range(1, cant - 5, 5):
         Lista_Pacientes[t].setTiempoLlegada(Lista_Pacientes[t].getTiempoLLegada() - dt.timedelta(minutes=11))
-    """
+    
 
-    """Para poder probar si el test cambio bien de gravedad a los pacientes que esperaron mucho en la
-    sala de espera tengo que recorrer todo el arreglo de lista pacientes y ir sumando uno por uno"""
+    Para poder probar si el test cambio bien de gravedad a los pacientes que esperaron mucho en la
+    sala de espera tengo que recorrer todo el arreglo de lista pacientes y ir sumando uno por uno
     Organizador.Reorganizar()
     #contadores
     rojo=0
