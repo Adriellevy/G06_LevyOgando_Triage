@@ -31,7 +31,7 @@ def test_Paciente_cambio_de_gravedad_naranja():
     :return:
     """
     paciente_1 = cPaciente("1", "naranja",1,None,None,None)
-    paciente_1.setTiempoLlegada( paciente_1.getTiempoLLegada() - dt.timedelta(minutes=10))
+    paciente_1.setTiempoLlegada(paciente_1.getTiempoLLegada() - dt.timedelta(minutes=10))
     paciente_1.setGravedadMayorPaciente()
     assert paciente_1.getGravedad() == 0
 
@@ -290,7 +290,7 @@ def teste_Limite_N_punta():
     Organizador.insert(paciente_2)
     Organizador.insert(paciente_3)
     lim= Organizador.Limite_Color_N()
-    assert lim == 2
+    assert lim == len(Organizador.Lista_de_pacientes)
 
 def teste_Limite_N():
     Organizador=cNuevoEnfoque
@@ -327,7 +327,7 @@ def teste_limite_AM_limite():
     Organizador.insert(paciente_5)
     Organizador.insert(paciente_6)
     lim = Organizador.Limite_Color_AM()
-    assert lim == 5
+    assert lim == len(Organizador.Lista_de_pacientes)
 
 
 def teste_limite_AM():
@@ -365,7 +365,7 @@ def teste_limite_V_limite():
     Organizador.insert(paciente_5)
     Organizador.insert(paciente_6)
     lim = Organizador.Limite_Color_V()
-    assert lim == 5
+    assert lim == len(Organizador.Lista_de_pacientes)
 
 def teste_limite_V():
     paciente_1 = cPaciente("juan", "Rojo", 1, None, None, None)

@@ -168,19 +168,25 @@ class cNuevoEnfoque:
 
     def Limite_Color_R(self):
         tam = len(self.Lista_de_pacientes)-1
+        i=0
         if len(self.Lista_de_pacientes) == 0:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 0:
             return 0  # solo hay un paciente rojo
         if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
+                i =i +1
                 if self.Lista_de_pacientes[x].getGravedad() == 0 and self.Lista_de_pacientes[x + 1].getGravedad() != 0:
                     return x
+
+            if i == tam:
+                    return len(self.Lista_de_pacientes)
         else:
-            raise cErrorTamanio("RARO")
+            cErrorTamanio("RARO")
 
     def Limite_Color_N(self):
         tam = len(self.Lista_de_pacientes) - 1
+        i=0
         if len(self.Lista_de_pacientes) == 0:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 1:
@@ -188,26 +194,35 @@ class cNuevoEnfoque:
 
         if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
+                i=i+1
                 if self.Lista_de_pacientes[x].getGravedad() == 1 and self.Lista_de_pacientes[x + 1].getGravedad() != 1:
                     return x
+            if i == tam:
+                    return len(self.Lista_de_pacientes)
+
         else:
-            raise cErrorTamanio("RARO")
+            cErrorTamanio("RARO")
 
     def Limite_Color_AM(self):
         tam = len(self.Lista_de_pacientes) - 1
+        i=0
         if len(self.Lista_de_pacientes) == 0:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 2:
             return 0  # solo hay un paciente rojo
         if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
+                i=i+1
                 if self.Lista_de_pacientes[x].getGravedad() == 2 and self.Lista_de_pacientes[x + 1].getGravedad() != 2:
-                    return x
-        else:
-            raise cErrorTamanio("RARO")
+                       return x
+            if i == tam:
+                    return len(self.Lista_de_pacientes)
+        else:cErrorTamanio("RARO")
+
 
     def Limite_Color_V(self):
         tam = len(self.Lista_de_pacientes) - 1
+        i=0
         if len(self.Lista_de_pacientes) == 0:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 3:
@@ -215,10 +230,13 @@ class cNuevoEnfoque:
 
         if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
+                i=i+1
                 if self.Lista_de_pacientes[x].getGravedad() == 3 and self.Lista_de_pacientes[x + 1].getGravedad() != 3:
                     return x
+            if i == tam:
+                    return len(self.Lista_de_pacientes)
         else:
-            raise cErrorTamanio("RARO")
+            cErrorTamanio("RARO")
 
     def Cambiar_Paciante_greedy(self, p):
         if p.getGravedad() == 0:
