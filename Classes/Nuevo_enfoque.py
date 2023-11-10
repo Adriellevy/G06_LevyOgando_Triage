@@ -187,7 +187,7 @@ class cNuevoEnfoque:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 1:
             return 0
-        if self.Lista_de_pacientes[tam].getGravedad() == 1:
+        if self.Lista_de_pacientes[tam+1].getGravedad() == 1:
             return tam
         elif len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
@@ -202,7 +202,7 @@ class cNuevoEnfoque:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 2:
             return 0  # solo hay un paciente rojo
-        if self.Lista_de_pacientes[tam].getGravedad() == 2:
+        if self.Lista_de_pacientes[tam+1].getGravedad() == 2:
             return tam
         elif len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
@@ -217,7 +217,7 @@ class cNuevoEnfoque:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 3:
             return 0  # solo hay un paciente rojo
-        if self.Lista_de_pacientes[tam].getGravedad() == 3:
+        if self.Lista_de_pacientes[tam+1].getGravedad() == 3:
             return tam
         elif len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
