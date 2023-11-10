@@ -172,9 +172,7 @@ class cNuevoEnfoque:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 0:
             return 0  # solo hay un paciente rojo
-        if self.Lista_de_pacientes[tam+1].getGravedad() == 0:
-            return tam
-        elif len(self.Lista_de_pacientes) > 1:
+        if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
                 if self.Lista_de_pacientes[x].getGravedad() == 0 and self.Lista_de_pacientes[x + 1].getGravedad() != 0:
                     return x
@@ -187,9 +185,8 @@ class cNuevoEnfoque:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 1:
             return 0
-        if self.Lista_de_pacientes[tam+1].getGravedad() == 1:
-            return tam
-        elif len(self.Lista_de_pacientes) > 1:
+
+        if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
                 if self.Lista_de_pacientes[x].getGravedad() == 1 and self.Lista_de_pacientes[x + 1].getGravedad() != 1:
                     return x
@@ -202,9 +199,7 @@ class cNuevoEnfoque:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 2:
             return 0  # solo hay un paciente rojo
-        if self.Lista_de_pacientes[tam+1].getGravedad() == 2:
-            return tam
-        elif len(self.Lista_de_pacientes) > 1:
+        if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
                 if self.Lista_de_pacientes[x].getGravedad() == 2 and self.Lista_de_pacientes[x + 1].getGravedad() != 2:
                     return x
@@ -217,9 +212,8 @@ class cNuevoEnfoque:
             raise cErrorTamanio("No hay pacientes a atender")
         if len(self.Lista_de_pacientes) == 1 and self.Lista_de_pacientes[0].getGravedad() == 3:
             return 0  # solo hay un paciente rojo
-        if self.Lista_de_pacientes[tam+1].getGravedad() == 3:
-            return tam
-        elif len(self.Lista_de_pacientes) > 1:
+
+        if len(self.Lista_de_pacientes) > 1:
             for x in range(tam):
                 if self.Lista_de_pacientes[x].getGravedad() == 3 and self.Lista_de_pacientes[x + 1].getGravedad() != 3:
                     return x
@@ -229,16 +223,16 @@ class cNuevoEnfoque:
     def Cambiar_Paciante_greedy(self, p):
         if p.getGravedad() == 0:
             lim = self.Limite_Color_R()
-            self.Lista_de_pacientes.insert(lim, p)
+            self.Lista_de_pacientes.insert(lim+1, p)
         if p.getGravedad() == 1:
             lim = self.Limite_Color_N()
-            self.Lista_de_pacientes.insert(lim, p)
+            self.Lista_de_pacientes.insert(lim+1, p)
         if p.getGravedad() == 2:
             lim = self.Limite_Color_AM()
-            self.Lista_de_pacientes.insert(lim, p)
+            self.Lista_de_pacientes.insert(lim+1, p)
         if p.getGravedad() == 3:
             lim = self.Limite_Color_V()
-            self.Lista_de_pacientes.insert(lim, p)
+            self.Lista_de_pacientes.insert(lim+1, p)
 
     def Insertar_gr(self, p):
         if p.getGravedad() == 0:
